@@ -18,9 +18,9 @@ Download Dataset melalui Google Drive
 
 Dataset dibagi menjadi beberapa subset sebagai berikut:
 
-Training: 70%
-Validation: 15%
-Testing: 15%
+- Training: 70%
+- Validation: 15%
+- Testing: 15%
 
 ### Data Augmentasi Train :
 
