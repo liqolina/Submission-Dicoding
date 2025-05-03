@@ -1,12 +1,13 @@
-# Flower Classification using Convolutional Neural Networks (CNN)
+# Flower Classification Menggunakan Convolutional Neural Networks (CNN)
 
 ## Latar Belakang Proyek
 
 Proyek ini bertujuan untuk merancang sebuah model Convolutional Neural Network (CNN) yang mampu mengklasifikasikan gambar bunga ke dalam 14 kelas berbeda berdasarkan dataset yang tersedia. Dataset tersebut dibagi menjadi tiga bagian, yaitu data pelatihan, validasi, dan pengujian. Model ini juga menggunakan pendekatan transfer learning dengan memanfaatkan arsitektur MobileNetV3Large. Untuk mencegah overfitting, digunakan callback seperti EarlyStopping dan ModelCheckpoint. Model yang telah dilatih diekspor ke dalam format SavedModel, TFLite, dan TFJS agar dapat digunakan pada berbagai platform.
 
 ## Dataset
-`Link Dataset!` <br>
-[![Google Drive Dataset](https://img.shields.io/badge/Download%20Dataset-Google%20Drive-blue?style=for-the-badge&logo=google-drive)](https://drive.google.com/file/d/1m9UBYCzLElZ8x_-b_jysE7A9y-jSq04u/view?usp=drive_link)
+Download Dataset melalui Google Drive
+
+[Google Drive](https://drive.google.com/file/d/1UhgDkbQY_8PGlE98EuiXcP5kWjaiQnOW/view?usp=drive_link)
 
 ### Informasi Dataset:
 - Dataset Flower Classification terdiri dari 14 kelas bunga yang berbeda.
@@ -47,7 +48,7 @@ Wikipedia
 - **Fully Connected (Dense) Layer**: Setelah proses ekstraksi fitur, lapisan fully connected menggabungkan semua neuron dari lapisan sebelumnya untuk melakukan klasifikasi akhir. 
 
 
-### Activation Functions:
+### Fungsi Aktivasi:
 
 - ReLU (Rectified Linear Unit): Digunakan pada lapisan tersembunyi untuk memperkenalkan non-linearitas, ReLU mengubah nilai negatif menjadi nol, memungkinkan jaringan untuk mempelajari hubungan kompleks dalam data. 
 Wikipedia
@@ -71,7 +72,7 @@ TensorFlow
 
 - ModelCheckpoint: Callback ini menyimpan model ke file setiap kali terjadi peningkatan pada metrik yang dipantau (misalnya, val_loss). Dengan demikian, model terbaik selama pelatihan dapat disimpan dan digunakan untuk evaluasi atau deployment selanjutnya.
 
-## Visualizations
+## Visualisasi
 
 ### Accuracy and Loss Plots:
 
@@ -79,7 +80,7 @@ TensorFlow
 
 ## Model Deployment
 
-### Model Formats:
+### Format Model:
 
 Model yang telah dilatih disimpan dalam beberapa format agar bisa digunakan di berbagai platform:
 
