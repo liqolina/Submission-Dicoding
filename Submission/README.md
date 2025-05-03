@@ -74,9 +74,11 @@ TensorFlow
 
 ## Visualisasi
 
-### Accuracy and Loss Plots:
+### Accuracy:
+![alt text](https://github.com/liqolina/Bike-Sharing-Dataset-Dicoding/blob/main/dashboard/Dashboard-1.PNG?raw=true)
 
-
+### Loss Plots:
+![alt text](https://github.com/liqolina/Bike-Sharing-Dataset-Dicoding/blob/main/dashboard/Dashboard-1.PNG?raw=true)
 
 ## Model Deployment
 
