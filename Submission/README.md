@@ -30,7 +30,7 @@ Data augmentation digunakan untuk meningkatkan keberagaman data pelatihan dengan
 
 Class weights digunakan untuk menyeimbangkan distribusi jumlah gambar antar kelas agar model tidak bias terhadap kelas mayoritas.
 
-## Model Architecture
+## Model Arsitektur
 
 ### Tipe Model:
 
