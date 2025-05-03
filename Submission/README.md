@@ -55,7 +55,7 @@ Wikipedia
 
 - Softmax: Diterapkan pada lapisan output untuk mengubah output menjadi distribusi probabilitas atas 14 kelas, memastikan total probabilitas berjumlah 1.
 
-## Training & Evaluation
+## Training
 
 ### Proses Training:
 
@@ -66,7 +66,7 @@ TensorFlow
 
 - Fungsi Loss: Menggunakan categorical cross-entropy sebagai fungsi loss, yang sesuai untuk tugas klasifikasi multi-kelas dengan label yang dikodekan secara one-hot.
 
-Callback:
+### Callback:
 
 - EarlyStopping: Callback ini memantau metrik validasi (misalnya, val_loss) dan menghentikan pelatihan jika tidak ada peningkatan setelah sejumlah epoch tertentu, yang ditentukan oleh parameter patience. Hal ini membantu mencegah overfitting dan menghemat sumber daya komputasi. 
 
