@@ -33,20 +33,54 @@ Dari pernyataan masalah tersebut, tujuan proyek ini dapat dirumuskan sebagai ber
 ### Solution statements
 Guna mencapai tujuan tersebut, diterapkan strategi solusi dengan mengandalkan variasi model machine learning.
 
-1. Menggunakan beberapa algoritma seperti Ridge, Lasso, ElasticNet, dan SVR. 
+1. Menggunakan beberapa algoritma seperti Ridge, Lasso, ElasticNet, dan SVR.
+2. Meningkatkan akurasi dan performa model dengan Hyperparameter Tuning.
+3. Menggunakan metrix evaluasi seperti RMSE dan MSE.
 
 ## Data Understanding
-Paragraf awal bagian ini menjelaskan informasi mengenai data yang Anda gunakan dalam proyek. Sertakan juga sumber atau tautan untuk mengunduh dataset. Contoh: [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Restaurant+%26+consumer+data).
+Dataset yang digunakan dalam proyek ini adalah USA Housing Dataset yang diperoleh dari platform Kaggle. Dataset ini berisi informasi mengenai sejumlah fitur yang mempengaruhi harga rumah di Amerika Serikat. Dataset tersebut tersedia secara publik dan dapat diunduh melalui Kaggle [USA Housing Dataset](https://www.kaggle.com/datasets/fratzcan/usa-house-prices).
 
-Selanjutnya uraikanlah seluruh variabel atau fitur pada data. Sebagai contoh:  
+### Variabel-variabel pada USA Housing Dataset adalah sebagai berikut:
+- Date: The date when the property was sold. This feature helps in understanding the temporal trends in property prices.
+- Price:The sale price of the property in USD. This is the target variable we aim to predict.
+- Bedrooms:The number of bedrooms in the property. Generally, properties with more bedrooms tend to have higher prices.
+- Bathrooms: The number of bathrooms in the property. Similar to bedrooms, more bathrooms can increase a property’s value.
+- Sqft Living: The size of the living area in square feet. Larger living areas are typically associated with higher property values.
+- Sqft Lot:The size of the lot in square feet. Larger lots may increase a property’s desirability and value.
+- Floors: The number of floors in the property. Properties with multiple floors may offer more living space and appeal.
+- Waterfront: A binary indicator (1 if the property has a waterfront view, 0 other- wise). Properties with waterfront views are often valued higher.
+- View: An index from 0 to 4 indicating the quality of the property’s view. Better views are likely to enhance a property’s value.
+- Condition: An index from 1 to 5 rating the condition of the property. Properties in better condition are typically worth more.
+- Sqft Above: The square footage of the property above the basement. This can help isolate the value contribution of above-ground space.
+- Sqft Basement: The square footage of the basement. Basements may add value depending on their usability.
+- Yr Built: The year the property was built. Older properties may have historical value, while newer ones may offer modern amenities.
+- Yr Renovated: The year the property was last renovated. Recent renovations can increase a property’s appeal and value.
+- Street: The street address of the property. This feature can be used to analyze location-specific price trends.
+- City: The city where the property is located. Different cities have distinct market dynamics.
+- Statezip: The state and zip code of the property. This feature provides regional context for the property.
+- Country: The country where the property is located. While this dataset focuseson properties in Australia, this feature is included for completeness.
 
-### Variabel-variabel pada Restaurant UCI dataset adalah sebagai berikut:
-- accepts : merupakan jenis pembayaran yang diterima pada restoran tertentu.
-- cuisine : merupakan jenis masakan yang disajikan pada restoran.
-- dst
-
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Melakukan beberapa tahapan yang diperlukan untuk memahami data, contohnya teknik visualisasi data atau exploratory data analysis.
+### Feature Data:
+| Column | Non-Null Count | Dtype |
+| ------------- | ------------- |
+| date | 4140 non-null | object |
+| price | 4140 non-null | float64 |
+|bedrooms|4140 non-null|float64|
+|bathrooms|4140 non-null|float64|
+|sqft_living|4140 non-null|int64| 
+|sqft_lot|4140 non-null|int64|  
+ 6   floors         4140 non-null   float64
+ 7   waterfront     4140 non-null   int64  
+ 8   view           4140 non-null   int64  
+ 9   condition      4140 non-null   int64  
+ 10  sqft_above     4140 non-null   int64  
+ 11  sqft_basement  4140 non-null   int64  
+ 12  yr_built       4140 non-null   int64  
+ 13  yr_renovated   4140 non-null   int64  
+ 14  street         4140 non-null   object 
+ 15  city           4140 non-null   object 
+ 16  statezip       4140 non-null   object 
+ 17  country        4140 non-null   object 
 
 ## Data Preparation
 Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
