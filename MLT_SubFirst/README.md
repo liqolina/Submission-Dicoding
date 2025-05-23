@@ -112,6 +112,7 @@ for j in range(i+1, len(axes)):
 plt.tight_layout()
 plt.show()
 ```
+![](https://github.com/liqolina/Submission-Dicoding/blob/main/MLT_SubFirst/IMG/Distribute_DF.png)
 
 ### Numerical Predictor Variables dengan Variabel Target
 ```
@@ -132,6 +133,7 @@ for i, ax in zip(train_num.columns, axs.flatten()):
 
 plt.show()
 ```
+![](https://github.com/liqolina/Submission-Dicoding/blob/main/MLT_SubFirst/IMG/Distribute_Numeric.png)
 
 ### Categorical Predictor Variables dengan Variabel Target
 ```
@@ -149,6 +151,7 @@ plot_grid.map(draw_boxplot, "price", "value")
 plt.tight_layout()
 plt.show()
 ```
+![](https://github.com/liqolina/Submission-Dicoding/blob/main/MLT_SubFirst/IMG/Distribute_Category.png)
 
 ### Distribution of Target variable (Price)
 ```
@@ -161,6 +164,9 @@ mask[np.triu_indices_from(mask)] = True
 #Plotting heatmap
 sns.heatmap(train_num.corr(), cmap=sns.diverging_palette(20, 220, n=200), mask = mask, annot=True, center = 0)
 ```
+
+![](https://github.com/liqolina/Submission-Dicoding/blob/main/MLT_SubFirst/IMG/Distribute_Matrix.png)
+
 1. Terdapat korelasi sebesar 87% antara sqft_above dengan sqft_living.
 2. Terdapat korelasi sebesar 76% antara sqft_living dengan bathroom.
 3. Dan fitur independen yang memiliki korelasi yang baik dengan fitur independen lainnya.
@@ -322,4 +328,4 @@ Model yang digunakan dalam projek ini diantaranya Ridge Regression, Lasso Regres
 |ElasticNet Regression| 0.044542234401517077| 0.07257195138834753| 0.21105031248855585| 0.2693918175972454|
 
 ### Visualisasi Evaluation 
-
+![](https://github.com/liqolina/Submission-Dicoding/blob/main/MLT_SubFirst/IMG/Perbandinngan_Model.png)
