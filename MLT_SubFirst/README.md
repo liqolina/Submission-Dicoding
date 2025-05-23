@@ -35,7 +35,7 @@ Guna mencapai tujuan tersebut, diterapkan strategi solusi dengan mengandalkan va
 
 1. Menggunakan beberapa algoritma seperti Ridge, Lasso, ElasticNet, dan SVR.
 2. Meningkatkan akurasi dan performa model dengan Hyperparameter Tuning.
-3. Menggunakan metrix evaluasi seperti RMSE dan MSE.
+3. Menggunakan metrik evaluasi seperti RMSE dan MSE.
 
 ## Data Understanding
 Dataset yang digunakan dalam proyek ini adalah USA Housing Dataset yang diperoleh dari platform Kaggle. Dataset ini berisi informasi mengenai sejumlah fitur yang mempengaruhi harga rumah di Amerika Serikat. Dataset tersebut tersedia secara publik dan dapat diunduh melalui Kaggle [USA Housing Dataset](https://www.kaggle.com/datasets/fratzcan/usa-house-prices).
@@ -205,7 +205,7 @@ df['price_per_sqft'] = df['price'] / df['sqft_living']
 ```
 
 ### Penanganan Outliers
-Outliers dapat menganggu hasil performa model prediksi, perlu dihapus dari data.
+Outliers dapat memengaruhi performa model prediksi secara signifikan. Dengan penanganan outlier yang tepat dapat meningkatkan akurasi dan stabilitas performa model.
 
 ```
 # Columns for IQR filtering
@@ -278,47 +278,61 @@ print(X_test.shape)
 Tahapan ini membahas mengenai model machine learning yang digunakan untuk menyelesaikan permasalahan yaitu Ridge Regression, Lasso Regression, ElasticNet Regression, dan Support Vector Regression (SVR). Dan juga hyperparameter tuning untuk meningkatkan kinerja model.
 
 1. Ridge Regression
-Model Ridge Regression menggunakan pendekatan regularisasi L2 untuk menurunkan kompleksitas model, terutama saat data memiliki multikolinearitas.
 
-- Konfigurasi: Nilai alpha diseleksi menggunakan GridSearchCV dengan rentang nilai yang cukup detail, mulai dari 5 hingga 15, termasuk nilai desimal kecil seperti 10.35 dan 10.36.
+    Model Ridge Regression menggunakan pendekatan regularisasi L2 untuk menurunkan kompleksitas model, terutama saat data memiliki multikolinearitas.
 
-- Kelebihan: Cenderung menjaga semua fitur tetap dalam model dan sangat bermanfaat ketika fitur saling berkorelasi.
+    - Konfigurasi: Nilai alpha diseleksi menggunakan GridSearchCV dengan rentang nilai yang cukup detail, mulai dari 5 hingga 15, termasuk nilai desimal kecil seperti 10.35 dan 10.36.
 
-- Kekurangan: Jika tingkat regularisasi terlalu tinggi, model dapat kehilangan kemampuan dalam menangkap pola penting karena prediksi menjadi terlalu konservatif.
+    - Kelebihan: Cenderung menjaga semua fitur tetap dalam model dan sangat bermanfaat ketika fitur saling berkorelasi.
+
+    - Kekurangan: Jika tingkat regularisasi terlalu tinggi, model dapat kehilangan kemampuan dalam menangkap pola penting karena prediksi menjadi terlalu konservatif.
 
 2. Lasso Regression
-Lasso Regression merupakan metode regresi yang memberikan penalti L1, yang secara otomatis dapat mengecilkan beberapa koefisien menjadi nol — sehingga juga berfungsi sebagai alat seleksi fitur.
 
-- Konfigurasi: Dalam eksperimen ini, alpha ditetapkan pada 0.001 untuk menghindari penalti yang terlalu berat sambil tetap mengontrol overfitting.
+    Lasso Regression merupakan metode regresi yang memberikan penalti L1, yang secara otomatis dapat mengecilkan beberapa koefisien menjadi nol — sehingga juga berfungsi sebagai alat seleksi fitur.
 
-- Kelebihan: Efisien dalam menyaring fitur-fitur yang paling berpengaruh dan mengurangi kompleksitas model.
+    - Konfigurasi: Dalam eksperimen ini, alpha ditetapkan pada 0.001 untuk menghindari penalti yang terlalu berat sambil tetap mengontrol overfitting.
 
-- Kekurangan: Dapat mengabaikan fitur dengan kontribusi kecil namun tetap berarti, terutama jika regularisasi tidak disesuaikan secara tepat.
+    - Kelebihan: Efisien dalam menyaring fitur-fitur yang paling berpengaruh dan mengurangi kompleksitas model.
+
+    - Kekurangan: Dapat mengabaikan fitur dengan kontribusi kecil namun tetap berarti, terutama jika regularisasi tidak disesuaikan secara tepat.
 
 3. ElasticNet Regression
-ElasticNet mengombinasikan regularisasi L1 dan L2, menawarkan fleksibilitas tambahan dengan dua parameter yang bisa disesuaikan.
 
-- Konfigurasi: Model ini dibangun menggunakan alpha = 0.001 dan l1_ratio = 0.5, sebuah kompromi antara kekuatan seleksi Lasso dan kestabilan Ridge.
+    ElasticNet mengombinasikan regularisasi L1 dan L2, menawarkan fleksibilitas tambahan dengan dua parameter yang bisa disesuaikan.
 
-- Kelebihan: Memadukan dua pendekatan regularisasi memungkinkan ElasticNet bekerja baik pada dataset yang memiliki fitur dalam jumlah banyak dan saling berkorelasi.
+    - Konfigurasi: Model ini dibangun menggunakan alpha = 0.001 dan l1_ratio = 0.5, sebuah kompromi antara kekuatan seleksi Lasso dan kestabilan Ridge.
 
-Kekurangan: Membutuhkan pencarian kombinasi dua parameter, sehingga proses tuning bisa lebih rumit dibandingkan model linear biasa.
+    - Kelebihan: Memadukan dua pendekatan regularisasi memungkinkan ElasticNet bekerja baik pada dataset yang memiliki fitur dalam jumlah banyak dan saling berkorelasi.
+
+    - Kekurangan: Membutuhkan pencarian kombinasi dua parameter, sehingga proses tuning bisa lebih rumit dibandingkan model linear biasa.
 
 4. Support Vector Regression (SVR)
-SVR adalah teknik regresi yang mengandalkan konsep margin dan kernel untuk menangani data dengan hubungan yang tidak linear.
 
-- Konfigurasi: Model disesuaikan dengan C = 19, epsilon = 0.008, dan gamma = 0.00015. Ketiga parameter ini mempengaruhi seberapa ketat margin error dan kompleksitas kurva prediksi.
+    SVR adalah teknik regresi yang mengandalkan konsep margin dan kernel untuk menangani data dengan hubungan yang tidak linear.
 
-- Kelebihan: Cocok untuk memodelkan pola non-linear dan lebih tahan terhadap gangguan dari outlier.
+    - Konfigurasi: Model disesuaikan dengan C = 19, epsilon = 0.008, dan gamma = 0.00015. Ketiga parameter ini mempengaruhi seberapa ketat margin error dan kompleksitas kurva prediksi.
 
-- Kelemahan: Performa komputasi bisa menurun pada dataset besar dan proses pemilihan parameter lebih menantang.
+    - Kelebihan: Cocok untuk memodelkan pola non-linear dan lebih tahan terhadap gangguan dari outlier.
+
+    - Kekurangan: Performa komputasi bisa menurun pada dataset besar dan proses pemilihan parameter lebih menantang.
+      
+### Improvement Process
+- Menggunakan GridSearchCV pada model Ridge Regression dalam menentukan nilai alpha terbaik. Pendekatan ini bertujuan untuk memperoleh tingkat regularisasi yang optimal, sehingga model mampu menghindari overfitting sekaligus tetap menjaga kualitas prediksi secara akurat.
+
+### Mpdel Terbaik pada Solution Statement
+Model yang memberikan hasil terbaik yaitu ElasticNet. ElasticNet menggabungkan keunggulan dari Ridge dan Lasso Regression — yaitu kemampuan menangani multikolinearitas dan melakukan seleksi fitur secara otomatis. Hal ini membuatnya lebih fleksibel dalam menghadapi data dengan banyak fitur, baik yang saling berkorelasi maupun yang kurang relevan.
 
 ## Evaluation
 Projek ini berfokus pada prediksi harga rumah di USA. Tujuan dari proyek ini adalah mengembangkan model machine learning yang mampu memberikan prediksi harga properti secara akurat dan adaptif. Dengan memanfaatkan teknik regularisasi, validasi silang, dan seleksi fitur otomatis, model ini tidak hanya menangani kompleksitas data, tetapi juga memberikan nilai tambah bagi bisnis dalam pengambilan keputusan strategis terkait investasi, penjualan, maupun pembelian properti.
 
 Model yang digunakan dalam projek ini diantaranya Ridge Regression, Lasso Regression, ElasticNet Regression, dan Support Vector Regressor (SVR) dan Evaluasi model menggunakan 2 metrik yaitu MSE (Mean Squared Error) dan RMSE (Root Mean Squared Error).
 
-### Tabel Evaluation 
+Evaluasi Model dilakukan dengan menggunakan 2 metrik yaitu 
+1. MSE (Mean Squared Error) adalah metrik evaluasi yang digunakan untuk mengukur rata-rata kuadrat selisih antara nilai yang diprediksi oleh model dan nilai aktual
+2. RMSE (Root Mean Squared Error) - Digunakan untuk mengukur seberapa besar kesalahan rata-rata antara nilai yang diprediksi dan nilai aktual, dengan mengembalikannya ke satuan asli dari target.
+
+### Hasil Evaluation 
 
 |Model| MSE Train | MSE Test | RMSE Train | RMSE Test |
 |---  |------ |--------------  |-----|  -----|  
@@ -329,3 +343,35 @@ Model yang digunakan dalam projek ini diantaranya Ridge Regression, Lasso Regres
 
 ### Visualisasi Evaluation 
 ![](https://github.com/liqolina/Submission-Dicoding/blob/main/MLT_SubFirst/IMG/Perbandinngan_Model.png)
+
+### Penjelasan Formula Metrik yang Digunakan
+Metrik yang digunakan dalam projek ini adalah Mean Squared Error (MSE) dan Root Mean Squared Error (RMSE). Metrik ini dipilih untuk menyelesaikan prediksi regresi.
+
+1. Mean Squared Error (MSE)
+
+    Menghitung rata rata kuadrat antara nilai prediksi ŷᵢ dan nilai aktual yᵢ. Formula MSE adalah
+
+
+
+   - ŷᵢ adalah nilai prediksi
+   - yᵢ adalah nilai aktual/sebenarnya
+   - n adalah jumlah data
+  
+    Karena menggunakan kuadrat selisih, MSE memberi penalti besar untuk kesalahan prediksi yang jauh dari nilai aktual
+   
+2. Root Mean Squared Error (RMSE)
+
+    RMSE adalah akar dari MSE, yaitu mengukur kesalahan rata-rata antara nilai yang diprediksi dan nilai aktual, dengan mengembalikannya ke satuan asli dari target.
+
+
+
+   - ŷᵢ adalah nilai prediksi
+   - yᵢ adalah nilai aktual/sebenarnya
+   - n adalah jumlah data
+
+   RMSE bersifat lebih representatif karena menyajikan kesalahan prediksi dalam skala yang sama dengan variabel target.
+
+### Hasil Evaluation
+1. ElasticNet Regression dan Lasso Regression menunjukkan performa yang akurat, dengan nilai RMSE Test sebesar 0.269, menandakan kemampuan keduanya dalam menghasilkan prediksi yang konsisten terhadap data uji.
+2. Ridge Regression juga menunjukkan performa yang sebanding, dengan nilai RMSE Test sebesar 0.271, yang hanya sedikit lebih tinggi dibandingkan ElasticNet dan Lasso, sehingga tetap menjadi model yang andal.
+3. Berdasarkan nilai Mean Squared Error (MSE). ElasticNet, Lasso, dan Ridge memiliki nilai MSE Test yang relatif rendah dan konsisten.
