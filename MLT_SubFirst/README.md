@@ -351,7 +351,7 @@ Metrik yang digunakan dalam projek ini adalah Mean Squared Error (MSE) dan Root 
 
     Menghitung rata rata kuadrat antara nilai prediksi ŷᵢ dan nilai aktual yᵢ. Formula MSE adalah
 
-
+![](https://github.com/liqolina/Submission-Dicoding/blob/main/MLT_SubFirst/IMG/MSE.PNG)
 
    - ŷᵢ adalah nilai prediksi
    - yᵢ adalah nilai aktual/sebenarnya
@@ -363,7 +363,7 @@ Metrik yang digunakan dalam projek ini adalah Mean Squared Error (MSE) dan Root 
 
     RMSE adalah akar dari MSE, yaitu mengukur kesalahan rata-rata antara nilai yang diprediksi dan nilai aktual, dengan mengembalikannya ke satuan asli dari target.
 
-
+![](https://github.com/liqolina/Submission-Dicoding/blob/main/MLT_SubFirst/IMG/RSME.png)
 
    - ŷᵢ adalah nilai prediksi
    - yᵢ adalah nilai aktual/sebenarnya
