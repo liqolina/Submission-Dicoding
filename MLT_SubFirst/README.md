@@ -354,25 +354,25 @@ Metrik yang digunakan dalam projek ini adalah Mean Squared Error (MSE) dan Root 
 
     Menghitung rata rata kuadrat antara nilai prediksi ŷᵢ dan nilai aktual yᵢ. Formula MSE adalah
 
-![MSE](https://github.com/user-attachments/assets/ebeb7e5c-0a7b-433d-9c71-ae2a55c8635b)
+    ![MSE](https://github.com/user-attachments/assets/ebeb7e5c-0a7b-433d-9c71-ae2a55c8635b)
 
-   - ŷᵢ adalah nilai prediksi
-   - yᵢ adalah nilai aktual/sebenarnya
-   - n adalah jumlah data
-  
-    Karena menggunakan kuadrat selisih, MSE memberi penalti besar untuk kesalahan prediksi yang jauh dari nilai aktual
+    - ŷᵢ adalah nilai prediksi
+    - yᵢ adalah nilai aktual/sebenarnya
+    - n adalah jumlah data
+
+    Karena menggunakan kuadrat selisih, MSE memberi penalti besar untuk kesalahan prediksi yang jauh dari nilai aktual.
    
 2. Root Mean Squared Error (RMSE)
 
     RMSE adalah akar dari MSE, yaitu mengukur kesalahan rata-rata antara nilai yang diprediksi dan nilai aktual, dengan mengembalikannya ke satuan asli dari target.
 
-![RSME](https://github.com/user-attachments/assets/a5f48e4a-3df7-4dd6-9144-f0611571dbba)
+    ![RSME](https://github.com/user-attachments/assets/a5f48e4a-3df7-4dd6-9144-f0611571dbba)
 
-   - ŷᵢ adalah nilai prediksi
-   - yᵢ adalah nilai aktual/sebenarnya
-   - n adalah jumlah data
+    - ŷᵢ adalah nilai prediksi
+    - yᵢ adalah nilai aktual/sebenarnya
+    - n adalah jumlah data
 
-   RMSE bersifat lebih representatif karena menyajikan kesalahan prediksi dalam skala yang sama dengan variabel target.
+    RMSE bersifat lebih representatif karena menyajikan kesalahan prediksi dalam skala yang sama dengan variabel target.
 
 ### Hasil Evaluation
 1. ElasticNet Regression dan Lasso Regression menunjukkan performa yang akurat, dengan nilai RMSE Test sebesar 0.269, menandakan kemampuan keduanya dalam menghasilkan prediksi yang konsisten terhadap data uji.
