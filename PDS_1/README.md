@@ -8,7 +8,9 @@ Jaya Jaya Maju merupakan salah satu perusahaan multinasional yang telah berdiri 
 
 Perusahaan Multinasional Jaya Jaya Maju menghadapi tantangan terkait tingginya tingkat attrition dalam beberapa tahun terakhir. Tingginya attrition dapat berdampak negatif terhadap berbagai aspek operasional perusahaan, antara lain meningkatnya biaya rekrutmen dan pelatihan, terganggunya kontinuitas pekerjaan, serta menurunnya produktivitas dan semangat kerja tim secara keseluruhan. 
 
-Kemudian sis
+Selain itu, hingga saat ini perusahaan Jaya Jaya Maju belum memiliki sistem yang mampu mengidentifikasi penyebab atau faktor-faktor utama yang berkontribusi terhadap tingginya tingkat attrition karyawan. Ketiadaan sistem ini menyebabkan perusahaan kesulitan dalam memahami pola atau tren yang menyebabkan karyawan memilih untuk keluar.
+
+Lebih lanjut, perusahaan juga belum memiliki mekanisme pemantauan (monitoring) yang terintegrasi untuk mengawasi dinamika faktor-faktor internal yang berpotensi memengaruhi keputusan karyawan untuk meninggalkan perusahaan. Hal ini semakin memperumit upaya manajemen dalam merancang strategi retensi karyawan yang efektif dan berbasis data.
 
 ### Cakupan Proyek
 
