@@ -1,12 +1,14 @@
-# Proyek Akhir: Menyelesaikan Permasalahan Perusahaan Edutech
+# Proyek Akhir: Menyelesaikan Permasalahan Perusahaan Perusahaan Jaya Jaya Maju
 
 ## Business Understanding
 
-Jelaskan latar belakang bisnis dari perushaan tersebut.
+Jaya Jaya Maju merupakan salah satu perusahaan multinasional yang telah berdiri sejak tahun 2000. Perusahaan ini memiliki lebih dari 1.000 karyawan yang tersebar di berbagai wilayah di seluruh Indonesia. Meskipun telah berkembang menjadi perusahaan berskala besar, Jaya Jaya Maju masih menghadapi tantangan dalam pengelolaan sumber daya manusia. Salah satu dampak dari tantangan tersebut adalah tingginya tingkat attrition yang saat ini mencapai lebih dari 10%. Tingginya attrition berdampak negatif terhadap berbagai aspek operasional perusahaan seperti biaya rekrutmen dan pelatihan, mempengaruhi produktivitas dan semangat kerja tim secara keseluruhan dan kontinuitas pekerjaan. Untuk mencegah tingginya attrition diperlukan identifikasi berbagai faktor yang memengaruhi tingginya tingkat attrition.
 
 ### Permasalahan Bisnis
 
-Tuliskan seluruh permasalahan bisnis yang akan diselesaikan.
+Perusahaan Multinasional Jaya Jaya Maju menghadapi tantangan terkait tingginya tingkat attrition dalam beberapa tahun terakhir. Tingginya attrition dapat berdampak negatif terhadap berbagai aspek operasional perusahaan, antara lain meningkatnya biaya rekrutmen dan pelatihan, terganggunya kontinuitas pekerjaan, serta menurunnya produktivitas dan semangat kerja tim secara keseluruhan. 
+
+Kemudian sis
 
 ### Cakupan Proyek
 
