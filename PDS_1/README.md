@@ -108,6 +108,13 @@ Dashboard dapat diakses pada link berikut :
 
 [Looker Studio](https://lookerstudio.google.com/reporting/7497e034-bc96-4ff8-87bd-a2282a73d1bf)
 
+Berikut tampilan dashboard :
+
+![dashboard_1](https://github.com/user-attachments/assets/ff54c152-e47d-4eba-b62d-efbb8f6bf627)
+
+![dashboard_2](https://github.com/user-attachments/assets/d4aa4e53-5cb9-4c1d-9bc2-a25da8ad41fb)
+
+
 ## Conclusion
 
 Proyek ini bertujuan untuk membantu perusahaan Jaya Jaya Maju dalam mengidentifikasi dan memahami penyebab utama tingginya tingkat attrition karyawan, serta mengembangkan sistem prediksi berbasis data yang lebih efektif. 
