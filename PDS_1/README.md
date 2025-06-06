@@ -20,53 +20,109 @@ Lebih lanjut, perusahaan juga belum memiliki mekanisme pemantauan (monitoring) y
 
 Pada proyek ini, dilakukan beberapa tahap utama, yaitu:
 
-1. Business Understanding
+**1. Business Understanding**
+
 Tahap ini bertujuan untuk mengidentifikasi konteks bisnis secara menyeluruh dan mendefinisikan permasalahan yang dihadapi perusahaan yaitu attrition karyawan.
 
-2. Data Understanding & Preparation
+**2. Data Understanding & Preparation**
+
 Melakukan eksplorasi awal terhadap dataset karyawan, termasuk penanganan missing values dan outliers, serta melakukan transformasi fitur yang diperlukan guna mendukung analisis dan pemodelan data secara optimal.
 
-3. Exploratory Data Analysis (EDA)
+**3. Exploratory Data Analysis (EDA)**
+
 Visualisasi dilakukan terhadap distribusi berbagai variabel, seperti pendapatan, masa kerja, jarak ke kantor, dan variabel lainnya. Melalui visualisasi ini, dapat dianalisis pola dan tren yang berkaitan dengan attrition berdasarkan data masing-masing variabel, sehingga memungkinkan identifikasi faktor-faktor yang berpotensi memengaruhi tingkat attrition karyawan.
 
-4. Modeling
+**4. Modeling**
+
 Mengembangkan beberapa model prediktif untuk memproyeksikan kemungkinan attrition, antara lain menggunakan algoritma Logistic Regression, Random Forest, XGBoost, Gradient Boosting, dan SVM. Selanjutnya, dilakukan pengaturan parameter pelatihan model untuk memastikan bahwa performa yang dihasilkan akurat dalam memprediksi tingkat attrition. Performa masing-masing model dibandingkan menggunakan metrik evaluasi seperti akurasi, F1-score, dan AUC.
 
-5. Evaluation
+**5. Evaluation**
+
 Pemilihan model terbaik dilakukan berdasarkan hasil evaluasi terhadap sejumlah metrik kinerja. Selain itu, dilakukan interpretasi terhadap fitur-fitur yang paling berpengaruh dalam proses prediksi attrition, guna memberikan wawasan yang lebih mendalam mengenai faktor-faktor utama yang mendorong terjadinya attrition di perusahaan.
 
-6. Script Prediction & Deployment Preparation
+**6. Script Prediction & Deployment Preparation**
+
 Penyusunan script Python dilakukan untuk mengotomatiskan proses prediksi attrition. Model terbaik disimpan dalam format file .pkl agar dapat dengan mudah diintegrasikan ke dalam sistem.
 
-7. Dashboard Development
+**7. Dashboard Development**
+
 Dashboard interaktif dikembangkan menggunakan Looker Studio untuk memvisualisasikan insight dan metrik utama. Dashboard ini bertujuan mendukung pengambilan keputusan berbasis data dengan informasi yang mudah dipahami dan dapat diakses oleh manajer departemen HR.
 
-8. Recommendation
+**8. Recommendation**
+
 Rekomendasi strategis berbasis data disusun dan disampaikan kepada tim departemen Human Resources (HR) sebagai upaya untuk meningkatkan tingkat retensi karyawan serta menurunkan angka attrition. Rekomendasi ini didasarkan pada hasil analisis mendalam terhadap faktor-faktor yang memengaruhi attrition, sehingga dapat mendukung perumusan kebijakan yang lebih tepat sasaran.
 
 ### Persiapan
 
-1. Sumber data:
-   Sumber data dataset dapat diakses melalui tautan berikut:
-
+#### A. Sumber data:
    
-3. Setup environment:
+- Sumber data dataset dapat diakses melalui tautan berikut:
+  
+   [Github](https://github.com/dicodingacademy/dicoding_dataset/tree/main/employee)
+   
+#### B. Setup environment:
+   
+   **1. Conda Environment**
+   - **Buat dan Aktifkan Environment Conda**
+     
+        Membuat environment Conda baru dengan Python versi 3.11.13
+     
+         conda create -n notebook-env python=3.11.13 -y
+         
+        Setelah environment berhasil dibuat, aktifkan dengan perintah berikut:
 
-```
+         conda activate notebook-env
+     
+   - **Install Requirements**
 
-```
+         pip install -r requirements.txt
+   
+   - **Jalankan Notebook**
+     
+         jupyter notebook
 
+   **2. Predict Attrition with Modelling**
+
+   - Untuk menjalankan proses prediksi, gunakan perintah berikut di terminal:
+    
+         python predict.py
+     
 ## Business Dashboard
 
-Jelaskan tentang business dashboard yang telah dibuat. Jika ada, sertakan juga link untuk mengakses dashboard tersebut.
+Business dashboard yang telah dibuat dalam proyek ini merupakan sebuah dashboard yang dikembangkan menggunakan Looker Studio. Tujuan utamanya adalah untuk menyajikan informasi dan insight penting terkait attrition karyawan secara visual dan mudah dipahami, guna mendukung pengambilan keputusan berbasis data oleh tim manajemen, khususnya departemen HR.
+
+### Fitur Utama Dashboard:
+
+1. Tingkat Attrition Keseluruhan
+2. Distribusi Attrition Berdasarkan Variabel Penting
+3. Fitur-Fitur yang Mempengaruhi Attrition
+4. Filter Interaktif
+
+### Manfaat:
+1. Meningkatkan visibilitas terhadap penyebab utama attrition.
+2. Membantu tim HR dalam memonitor efektivitas strategi retensi.
+3. Memungkinkan tindakan proaktif terhadap area-area berisiko tinggi.
+
+### Visualize Dashboard
+Dashboard dapat diakses pada link berikut :
+
+[Looker Studio](https://lookerstudio.google.com/reporting/7497e034-bc96-4ff8-87bd-a2282a73d1bf)
 
 ## Conclusion
 
-Jelaskan konklusi dari proyek yang dikerjakan.
+Proyek ini bertujuan untuk membantu perusahaan Jaya Jaya Maju dalam mengidentifikasi dan memahami penyebab utama tingginya tingkat attrition karyawan, serta mengembangkan sistem prediksi berbasis data yang lebih efektif. 
+
+Melalui tahapan Business Understanding, EDA, pemodelan machine learning, dan dashboard visualisasi, ditemukan bahwa Usia, jumlah total tahun pengalaman kerja, tingkat jabatan, opsi saham, dan pendapatan bulanan mempengaruhi karyawan untuk bertahan di perusahaan. 
+
+Dengan pemodelan dan Business Dashboard dapat membantu departemen Human Resources (HR) dalam memonitor faktor-faktor yang mempengaruhi keluarnya karyawan dan mengambil tindak pencegahan dengan tepat.
 
 ### Rekomendasi Action Items (Optional)
 
-Berikan beberapa rekomendasi action items yang harus dilakukan perusahaan guna menyelesaikan permasalahan atau mencapai target mereka.
+Bedasarkan hasil analisis, berikut rekomendasi aksi untuk departemen Human Resources (HR) Jaya Jaya Maju :
 
-- action item 1
-- action item 2
+- Perkuat Hubungan Karyawan dengan Atasan Langsung (LoyaltyToManager).
+     Dengan hubungan baik antara atasan dengan karyawan akan menciptakan lingkungan kerja yang positif. Salah satu cara untuk membangun hubungan ini adalah dengan rutin melakukan survei umpan balik, sehingga karyawan merasa didengar dan dihargai."
+- Tingkatkan Program Pelatihan yang Tepat Sasaran.
+     Dengan memberikan pelatihan yang relevan dan sesuai kebutuhan karyawan sehingga pengembangan yang didapat membantu dalam pekerjaan  dan jalur kariernya, sehingga  meningkatkan loyalitas dan mengurangi kemungkinan karyawan untuk keluar dari perusahaan.
+- Fokus pada Retensi Karyawan Muda dan Baru Bergabung.
+     Dengan menyelenggarakan program onboarding dan pengembangan khusus yang dirancang untuk karyawan usia muda serta mereka yang baru bergabung, agar mereka merasa lebih cepat beradaptasi, mendapatkan dukungan yang memadai, dan memiliki peluang pengembangan karier yang jelas
