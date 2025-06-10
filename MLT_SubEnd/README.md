@@ -237,6 +237,7 @@ df_CBF['combined_features'] = df_CBF['title'].fillna('') + ' ' + \
 ```
 
 ### Transformasi Teks ke Vektor Numerik menggunakan TF-IDF Vectorizer
+Teknik pemrosesan teks yang digunakan untuk mengukur seberapa penting sebuah kata dalam sebuah dokumen relatif terhadap seluruh koleksi dokumen (corpus).
 
 ```
 # Ubah ke dalam bentuk vektor TF-IDF
