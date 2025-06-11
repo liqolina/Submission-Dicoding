@@ -56,184 +56,190 @@ Pendekatan ini menggunakan data interaksi pengguna, seperti penilaian (rating), 
 Dataset yang digunakan dalam proyek ini adalah Amazon Prime Movies and TV Shows dataset yang diperoleh dari platform Kaggle. Dataset ini berisi informasi mengenai daftar semua film dan acara TV yang tersedia di Amazon Prime. Dataset tersebut tersedia secara publik dan dapat diunduh melalui Kaggle [Amazon Prime Movies and TV Shows](https://www.kaggle.com/datasets/shivamb/amazon-prime-movies-and-tv-shows).
 
 Variabel-variabel pada Amazon Prime Movies and TV Shows dataset adalah sebagai berikut:
-- show_id : Unique Show ID
-- type : Movie or Tv Show
-- title : Title of Movie or Show
-- director : Director of Movie or Show
-- cast : Cast of Movie / Show
-- country : Country of Production
-- date_added : Date added on Prime
-- release_year : Release Year of the movie or show
-- rating : Rating of the movie or show
-- duration : Duration of the movie or show
-- listed_in : Genre
-- description : Description of the movie or show
+- id: The title ID on JustWatch.
+- title: The name of the title.
+- show_type: TV show or movie.
+- description: A brief description.
+- release_year: The release year.
+- age_certification: The age certification.
+- runtime: The length of the episode (SHOW) or movie.
+- genres: A list of genres.
+- production_countries: A list of countries that - produced the title.
+- seasons: Number of seasons if it's a SHOW.
+- imdb_id: The title ID on IMDB.
+- imdb_score: Score on IMDB.
+- imdb_votes: Votes on IMDB.
+- tmdb_popularity: Popularity on TMDB.
+- tmdb_score: Score on TMDB.
 
 ### Feature Data:
-| #   |Column         |Non-Null Count  |Dtype|  
-|---  |------         |--------------  |-----| 
-| 0   |show_id       |9668 non-null  | object|
-| 1   |type         | 9668 non-null  | object|
-| 2   |title        | 9668 non-null |  object|
-| 3   |director     | 7585 non-null |  object|
-| 4  | cast        |  8435 non-null |  object|
-| 5  | country     |  672 non-null  |  object|
-| 6   |date_added  |  155 non-null  |  object|
-| 7  | release_year  |9668 non-null|   int64 |
-| 8   |rating        |9331 non-null |  object|
-| 9  | duration    |  9668 non-null  | object|
-| 10 | listed_in    | 9668 non-null  | object|
-| 11 | description  | 9668 non-null  | object|
+#### Dataset Titles
+| #  | Column               |            Non-Null Count | Dtype   |
+|----|----------------------|----------------------------|---------|
+| 0  | id                   |        10873 non-null     | object  |
+| 1  | title                |        10873 non-null     | object  |
+| 2  | type                 |        10873 non-null     | object  |
+| 3  | description          |        10729 non-null     | object  |
+| 4  | release_year         |        10873 non-null     | int64   |
+| 5  | age_certification    |         3688 non-null     | object  |
+| 6  | runtime              |        10873 non-null     | int64   |
+| 7  | genres               |        10873 non-null     | object  |
+| 8  | production_countries |        10873 non-null     | object  |
+| 9  | seasons              |         1551 non-null     | float64 |
+| 10 | imdb_id              |        10172 non-null     | object  |
+| 11 | imdb_score           |         9765 non-null     | float64 |
+| 12 | imdb_votes           |         9753 non-null     | float64 |
+| 13 | tmdb_popularity      |        10302 non-null     | float64 |
+| 14 | tmdb_score           |         8747 non-null     | float64 |
+
+#### Dataset Credits
+| #   | Column     | Non-Null Count   | Dtype  |
+|-----|------------|------------------|--------|
+| 0   | person_id  | 140553 non-null  | int64  |
+| 1   | id         | 140553 non-null  | object |
+| 2   | name       | 140553 non-null  | object |
+| 3   | character  | 122705 non-null  | object |
+| 4   | role       | 140553 non-null  | object |
+
+
 
 ### Missing Values: 
 
 |Missing values dalam dataset:| Value |
-|-------------------|-----| 
-|show_id         |   0|
-|type          |     0|
-|title        |      0|
-|director     |   2083|
-|cast          |  1233|
-|country       |  8996|
-|date_added   |   9513|
-|release_year |      0|
-|rating       |    337|
-|duration     |      0|
-|listed_in    |      0|
-|description   |     0|
+|-----------|---------------|
+| id        | 0             |   
+| title     | 0             |   
+| type      | 0             |  
+| description | 144         |   
+| release_year | 0          |   
+| age_certification | 7185   |   
+| runtime   | 0             |  
+| genres    | 0             |   
+| production_countries | 0   |   
+| seasons   | 9322          |   
+| imdb_id   | 701           |   
+| imdb_score | 1108         |   
+| imdb_votes | 1120         |   
+| tmdb_popularity | 571     |   
+| tmdb_score | 2126         |   
+
 
 
 ## Exploratory Data Analysis (EDA):
 ### Tahun Rilis Terbanyak
 Visualisasi distribusi tahun rilis untuk Movie dan TV Show menunjukkan bahwa penambahan konten baru mengalami peningkatan signifikan pada rentang tahun 2015 hingga 2020. Pada periode ini, jumlah konten yang dirilis merupakan yang terbanyak dibandingkan tahun-tahun sebelumnya.
-![TahunRilis](https://github.com/user-attachments/assets/efa0798c-f683-4440-be32-ca18793ae628)
+![TahunRilis](https://github.com/user-attachments/assets/3d8d830c-f0f4-4802-90ac-8a9b20ee9a1c)
 
-### Distribusi Rating Konten
-Distribusi konten berdasarkan rating menunjukkan bahwa Amazon Prime memiliki banyak konten yang ditujukan untuk audiens remaja. Hal ini terlihat dari dominasi kategori rating seperti "13+" dan "16+", yang merupakan dua kategori dengan jumlah konten terbanyak di platform tersebut.
-![DistribusiRating](https://github.com/user-attachments/assets/e7637192-24f5-45d4-8157-9bae438fcc95)
+
+### Distribusi Age Certification
+Distribusi konten berdasarkan Age Certification menunjukkan bahwa Amazon Prime memiliki banyak konten yang ditujukan untuk audiens remaja. Hal ini terlihat dari dominasi kategori Age Certification seperti "R" dan "PG-13", yang merupakan dua kategori dengan jumlah konten terbanyak di platform tersebut.
+![DistribusiAgeCertification](https://github.com/user-attachments/assets/3c21a7cd-7fbe-4f47-a881-b3959d0bab77)
+
 
 ### Top Genre Amazon Prime
 Menvisualisasi genre top 5 di Amazon Prime. Visualisasi menunjukkan bahwa genre yang paling banyak ditampilkan dalam dataset adalah Drama, Comedy, Action, Suspense, dan Kids. Kelima genre ini merupakan genre terpopuler dengan jumlah konten terbanyak.
-![TopGenre](https://github.com/user-attachments/assets/b500ce2b-c4a4-44eb-8097-fa228c1fafc5)
+![TopGenre](https://github.com/user-attachments/assets/dadc1423-0e74-448d-ad66-367846c288fc)
+
 
 ### Distribusi Durasi Movie
 Visualisasi menunjukkan distribusi durasi film di Amazon Prime, dengan mayoritas Movie memiliki durasi antara 80 hingga 120 menit. Hal ini mencerminkan preferensi umum terhadap film berdurasi standar.
-![DistribusiDurasi](https://github.com/user-attachments/assets/a8e73098-4828-4bf8-ac02-ed6b43872836)
+![DistribusiDurasi](https://github.com/user-attachments/assets/31a77647-0b61-4aa0-9e1b-0f35d49951ad)
+
 
 ### Distribusi Durasi TV Series
 Visualisasi menunjukkan distribusi jumlah season pada TV Show di Amazon Prime. Mayoritas serial memiliki hanya 1 season, menunjukkan dominasi format mini series atau limited series di platform ini.
-![DistribusiDurasiTV](https://github.com/user-attachments/assets/cab4823b-8cc6-43fb-82ba-3d05d22da0b4)
+![DistribusiDurasiTV](https://github.com/user-attachments/assets/5a210e12-c679-4734-81b7-d1447006e2ac)
+
 
 
 ## Data Preparation
 ### Handling Missing Values
 Penanganan nilai hilang dilakukan untuk menjaga kualitas data dan menghindari bias pada model. Berikut pendekatan yang digunakan:
 
-- Kolom director dan cast diisi dengan nilai "unknown".
-- Kolom rating diisi dengan modus (nilai yang paling sering muncul).
+- Kolom Age Certification akan diisi dengan data "Unrated".
+- Kolom Seasons akan diisi dengan data "0" dikarenakan tidak ada season.
 
 Dengan penanganan missing values dapat memberikan peningkatan terhadap kinerja model dan data tidak menjadi bias.
 
 Data sebelum di perbaiki
 
 |Missing values dalam dataset:| Value |
-|-------------------|-----| 
-|show_id         |   0|
-|type          |     0|
-|title        |      0|
-|director     |   2083|
-|cast          |  1233|
-|country       |  8996|
-|date_added   |   9513|
-|release_year |      0|
-|rating       |    337|
-|duration     |      0|
-|listed_in    |      0|
-|description   |     0|
+|-----------|---------------|
+| id        | 0             |   
+| title     | 0             |   
+| type      | 0             |  
+| description | 144         |   
+| release_year | 0          |   
+| age_certification | 7185   |   
+| runtime   | 0             |  
+| genres    | 0             |   
+| production_countries | 0   |   
+| seasons   | 9322          |   
+| imdb_id   | 701           |   
+| imdb_score | 1108         |   
+| imdb_votes | 1120         |   
+| tmdb_popularity | 571     |   
+| tmdb_score | 2126         | 
 
 
 Data setelah di perbaiki
 
 |Missing values dalam dataset:| Value |
 |-------------------|-----| 
-|show_id        |   0|
-|type           |   0|
-|title           |  0|
-|director       |   0|
-|cast           |   0|
-|release_year   |   0|
-|rating         |   0|
-|duration        |  0|
-|listed_in      |   0|
-|description    |   0|
+| id                  | 0     |   
+| title               | 0     |  
+| type                | 0     |   
+| description         | 0     |   
+| release_year        | 0     |   
+| age_certification   | 0     |   
+| runtime             | 0     |  
+| genres              | 0     |   
+| production_countries| 0     |   
+| seasons             | 0     |   
+| imdb_id             | 701   |   
+| imdb_score          | 0     |   
+| imdb_votes          | 0     |   
+| tmdb_popularity     | 0     |  
+| tmdb_score          | 0     |   
+| year_group          | 933   |  
+| has_imdb            | 0     |   
+
 
 Bedasarkan data missing sebelum diperbaiki terdapat nilai missing values yang tinggi, yaitu 'country' dan 'date_added'. Dari kedua kolom tersebut tidak digunakan karena proporsi nilai hilangnya sangat tinggi dan dinilai tidak relevan terhadap proses rekomendasi.
 
-### Replace Rating
-Dalam dataset, ada beberapa nilai yang sebenarnya sama, tetapi ditulis dengan nama atau format yang berbeda. Untuk membuat data lebih konsisten dan mudah dianalisis, nama-nama tersebut diganti atau diseragamkan menjadi satu format yang sama.
+### Handling Data
+Dalam dataset, ada kolom yang berisi string list. Dengan format tersebut, akan menganggu proses modeling karena adanya simbol dan lainnya.
 
 ```
-#basically we are replacing the names to make it less cluster
-df['rating']=df['rating'].replace({
-    "16": "16+",
-    "AGES_16_": "16+",
-    "AGES_18_": "18+",
-    "R": "18+",
-    "NC-17": "18+",
-    "13+": "PG-13",
-    "PG-13": "PG-13",
-    "G": "GENERAL",
-    "ALL": "GENERAL",
-    "ALL_AGES": "GENERAL",
-    "UNRATED": "UNRATED",
-    "NOT_RATE": "UNRATED",
-    "NR": "UNRATED",
-    "7+": "TV-Y7",
-    "TV-NR": "TV-UNRATED"    
-})
+# Pastikan kolom 'genres' dan 'production_countries' adalah string
+df['genres'] = df['genres'].astype(str)
+df['production_countries'] = df['production_countries'].astype(str)
+
+# Mengekstrak genre pertama dan negara produksi pertama dari kolom yang berisi string list
+df['genres'] = df['genres'].str.replace('[', '', regex=False)\
+                                   .str.replace(']', '', regex=False)\
+                                   .str.replace("'", '', regex=False)
+df['genre'] = df['genres'].str.split(',').str[0].str.strip()
 ```
 
-### Mengkategorikan Duration
-Mengkategorikan duration bertujuan untuk memisahkan antara durasi movie dengan TV series dikarenakan ada perbedaan jenis durasi. 
-
-Durasi diklasifikasikan ke dalam dua bentuk:
-
-- `duration_in_min` untuk Movie, dikonversi dari satuan waktu.
-- `duration_in_seasons` untuk TV Show, dihitung dari jumlah season.
-
+Memisahkan Role Actor dan Director supaya mempermudah dalam pemprosesan
 ```
-def condi(x):
-    if 'min' in x:
-        return int(x.split()[0])
-    else:
-        return 0
-df['duration_in_min']=df['duration'].apply(condi)
+# Pisahkan DIRECTOR
+directors = df_credits[df_credits['role'] == 'DIRECTOR'].groupby('id')['name'].first().reset_index()
+directors.columns = ['id', 'director']
+print(directors.head())
 
-df.head()
+df = df.merge(directors, on='id', how='left')
 ```
 
-Mendefinisikan duration by season
-```
-def condi(x):
-    if 'season' in x:
-        return int(x.split()[0])
-    else:
-        return 0
-df['duration_in_seasons']=df['duration'].apply(condi)
-
-df.head()
-```
 
 ### Feature Engineering
 Menggabungkan berbagai kolom teks (seperti title, director, cast, listed_in, dan description) menjadi satu kolom baru content. Hal ini dilakukan untuk memberikan representasi teks yang lebih komprehensif tentang film atau acara yang ada. Dan membuat fitur gabungan untuk pendekatan Content-Based Filtering
 
 ```
 # Ambil kolom yang relevan
-df_CBF['combined_features'] = df_CBF['title'].fillna('') + ' ' + \
-                          df_CBF['director'].fillna('') + ' ' + \
-                          df_CBF['cast'].fillna('') + ' ' + \
-                          df_CBF['listed_in'].fillna('') + ' ' + \
-                          df_CBF['description'].fillna('')
+df_CBF['combined_features'] = df_CBF[['title', 'description', 'cast', 'genres', 'director']] \
+                    .fillna('').agg(' '.join, axis=1)
 ```
 
 ### Transformasi Teks ke Vektor Numerik menggunakan TF-IDF Vectorizer
@@ -316,9 +322,9 @@ Untuk proyek sistem rekomendasi ini, metrik evaluasi yang digunakan adalah Preci
 evaluate_recommendation_system("The Cat in the Hat Knows a Lot About Halloween!", relevant_movies, k=10)
 ```
 
-Evaluation for: 'The Cat in the Hat Knows a Lot About Halloween!'
-Top-10 Recommendations: ['The Cat in the Hat Knows a Lot About Christmas', 'The Cat in the Hat Knows a Lot About Camping!', 'The Cat in the Hat Knows a Lot About Space!', 'The Cat in the Hat Knows a Lot About That!', 'Morphle Halloween Special - The Halloween Candy Magic Pet', 'CoComelon Halloween Songs', 'Oddbods - Halloween Special', 'Steve and Maggie - Haunted Halloween Special (Vol. 4)', 'Rhymes for Kids and Babies - Spooky Halloween Songs - Mother Goose Club', 'Halloween Kids Songs by Little Baby Bum']
-Ground Truth: ['Faster', 'Halloween Kids Songs by Little Baby Bum', 'Halloween Heroes', '27 September']
+Evaluation for: 'Bleed'
+Top-10 Recommendations: ['DIVE!!', 'Digging to Death', 'Girl, Chill', 'Twinsanity', 'Cave Club', 'Chicago Massacre: Richard Speck', 'Seven Alone', 'Hellblock 13', 'Devil in the Flesh', 'Erik Terrell: Live at the Helium Comedy Club']
+Ground Truth: ['Putham Pudhu Kaalai ', 'Digging to Death', 'All Through the House', 'Sita Ramam']
 
 Precision@10: 0.1
 Recall@10:    0.25
@@ -394,14 +400,15 @@ Metrik yang digunakan dalam projek ini adalah Mean Squared Error (MSE) dan Root 
 
 
 #### Visualisasi Metrik Collaborative Filtering
+![EvaluationCF](https://github.com/user-attachments/assets/e2221ab5-f8cd-472c-a78b-7efebd9f862a)
 
-![EvaluationCF](https://github.com/user-attachments/assets/2163ed62-b9c2-40ca-b2a8-dd55fcf9763e)
+
 
 #### Hasil Evaluation Metrics
 
-1. Penurunan MSE dan RMSE menunjukkan bahwa model berhasil mempelajari hubungan antara pengguna dan item (film) dengan cukup baik seiring berjalannya waktu.
-2. RMSE yang stabil di sekitar angka 4.2 menunjukkan bahwa model tidak lagi mengalami overfitting atau underfitting secara signifikan setelah melewati sekitar 20 epoch.
-3. Namun, meskipun MSE rendah, nilai RMSE yang masih cukup tinggi menunjukkan bahwa masih terdapat deviasi yang lumayan antara prediksi dan nilai aktual—yang bisa jadi disebabkan oleh variasi data pengguna yang kompleks atau sparsitas data.
+1. Model berhasil belajar dengan cepat dan menyesuaikan diri terhadap data di beberapa epoch pertama.
+2. Proses pelatihan menunjukkan konvergensi yang stabil, dengan penurunan error yang konsisten.
+3. Nilai RMSE yang tetap di kisaran ~1.8 mengindikasikan bahwa masih ada ruang untuk perbaikan, kemungkinan dari segi arsitektur model, preprocessing data, atau hyperparameter tuning.
 
 
 ## Hasil Akhir Project
