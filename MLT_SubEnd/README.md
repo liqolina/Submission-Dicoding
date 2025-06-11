@@ -25,7 +25,7 @@ Baik pengguna baru maupun lama sering kali tidak memiliki waktu cukup untuk menc
 ### Problem Statements
 
 Menjelaskan pernyataan masalah:
-- Dengan berbagai pilihan tontonan yang menarik di amazon prime, pengguna merasa kesulitan dalam memilih yang mereka suka dan mengakibatkan pengguna mengurangi interaksi dalam memilih tontonan di platform Amazon Prime
+- Dengan berbagai pilihan tontonan yang menarik di Amazon Prime, pengguna merasa kesulitan dalam memilih yang mereka suka dan mengakibatkan pengguna mengurangi interaksi dalam memilih tontonan di platform Amazon Prime
 - Platform Amazon Prime memiliki banyak tontonan yang tersedia, namun pengguna bingung dalam memilih jenis tontonan atau konten yang sesuai dengan preferensi mereka.
 - Meskipun tersedia fitur pencarian, sistem saat ini belum sepenuhnya mampu untuk menyarankan konten baru yang belum pernah dilihat, tetapi berpotensi diminati.
 
@@ -157,7 +157,7 @@ Visualisasi menunjukkan distribusi jumlah season pada TV Show di Amazon Prime. M
 Penanganan nilai hilang dilakukan untuk menjaga kualitas data dan menghindari bias pada model. Berikut pendekatan yang digunakan:
 
 - Kolom Age Certification akan diisi dengan data "Unrated".
-- Kolom Seasons akan diisi dengan data "0" dikarenakan tidak ada season.
+- Kolom seasons akan diisi dengan nilai 0 untuk konten jenis Movie yang memang tidak memiliki season.
 
 Dengan penanganan missing values dapat memberikan peningkatan terhadap kinerja model dan data tidak menjadi bias.
 
@@ -205,7 +205,6 @@ Data setelah di perbaiki
 | has_imdb            | 0     |   
 
 
-Bedasarkan data missing sebelum diperbaiki terdapat nilai missing values yang tinggi, yaitu 'country' dan 'date_added'. Dari kedua kolom tersebut tidak digunakan karena proporsi nilai hilangnya sangat tinggi dan dinilai tidak relevan terhadap proses rekomendasi.
 
 ### Handling Data
 Dalam dataset, ada kolom yang berisi string list. Dengan format tersebut, akan menganggu proses modeling karena adanya simbol dan lainnya.
@@ -234,7 +233,7 @@ df = df.merge(directors, on='id', how='left')
 
 
 ### Feature Engineering
-Menggabungkan berbagai kolom teks (seperti title, director, cast, listed_in, dan description) menjadi satu kolom baru content. Hal ini dilakukan untuk memberikan representasi teks yang lebih komprehensif tentang film atau acara yang ada. Dan membuat fitur gabungan untuk pendekatan Content-Based Filtering
+Menggabungkan berbagai kolom teks (seperti title, director, cast, genres, dan description) menjadi satu kolom baru content. Hal ini dilakukan untuk memberikan representasi teks yang lebih komprehensif tentang film atau acara yang ada. Dan membuat fitur gabungan untuk pendekatan Content-Based Filtering
 
 ```
 # Ambil kolom yang relevan
@@ -256,7 +255,7 @@ print(f"TF-IDF Matrix Shape: {tfidf_matrix.shape}")
 
 ## Modeling
 ### 1. Model Development Content Based Filtering
-Digunakan untuk merekomendasikan film atau TV show berdasarkan kemiripan konten seperti genre, deskripsi, sutradara, dll.
+Digunakan untuk merekomendasikan film atau TV show berdasarkan kemiripan konten seperti genre, deskripsi, sutradara, dll. Dengan menggunakan pendekatan matrix factorization melalui embedding layer dan neural network sederhana.
 
 - Parameter : 
 -- Vectorizer: `TfidfVectorizer(stop_words='english')`
@@ -270,8 +269,8 @@ Digunakan untuk merekomendasikan film atau TV show berdasarkan kemiripan konten 
 -- Rentan terhadap rekomendasi monoton (konten terlalu mirip).
 -- Bergantung pada kualitas metadata.
 
-### 1. Model Development Collaborative Filtering
-Digunakan untuk merekomendasikan film atau TV show berdasarkan kemiripan konten seperti genre, deskripsi, sutradara, dll. Dengan menggunakan pendekatan matrix factorization melalui embedding layer dan neural network sederhana.
+### 2. Model Development Collaborative Filtering
+Digunakan untuk merekomendasikan film atau TV show berdasarkan kemiripan konten seperti genre, deskripsi, sutradara, dll.
 
 - Parameter :
 -- Embedding(input_dim=num_users, output_dim=50)
@@ -294,7 +293,7 @@ Digunakan untuk merekomendasikan film atau TV show berdasarkan kemiripan konten 
 -- Tidak bekerja optimal untuk pengguna/item baru (cold-start).
 -- Membutuhkan volume data besar dan preprocessing tambahan.
 
-
+Dan tambahan Sistem Rekomendasi Menggunakan Collaborative Filltering
     
 ### Improvement Process
 - Collaborative Filtering mampu menyediakan rekomendasi yang lebih variatif dan personal dengan memanfaatkan pola interaksi pengguna.
@@ -319,17 +318,8 @@ Untuk proyek sistem rekomendasi ini, metrik evaluasi yang digunakan adalah Preci
         print(f"F1-Score@{k}:  {f1}")
 ```
 ```
-evaluate_recommendation_system("The Cat in the Hat Knows a Lot About Halloween!", relevant_movies, k=10)
+evaluate_recommendation_system("Bleed", relevant_movies, k=10)
 ```
-
-Evaluation for: 'Bleed'
-Top-10 Recommendations: ['DIVE!!', 'Digging to Death', 'Girl, Chill', 'Twinsanity', 'Cave Club', 'Chicago Massacre: Richard Speck', 'Seven Alone', 'Hellblock 13', 'Devil in the Flesh', 'Erik Terrell: Live at the Helium Comedy Club']
-Ground Truth: ['Putham Pudhu Kaalai ', 'Digging to Death', 'All Through the House', 'Sita Ramam']
-
-Precision@10: 0.1
-Recall@10:    0.25
-F1-Score@10:  0.1429
-{'precision': 0.1, 'recall': 0.25, 'f1_score': 0.1429}
 
 
 #### Penjelasan Metrik yang digunakan
@@ -356,6 +346,17 @@ Recall yang tinggi menunjukkan bahwa sistem mampu menangkap sebagian besar item 
 F1-Score yang tinggi menunjukkan bahwa sistem tidak hanya memberikan rekomendasi yang relevan (precision), tetapi juga mencakup sebagian besar item relevan yang tersedia (recall).   
 
 #### Hasil Metrik Content-based Filtering
+
+Evaluation for: 'Bleed'
+Top-10 Recommendations: ['DIVE!!', 'Digging to Death', 'Girl, Chill', 'Twinsanity', 'Cave Club', 'Chicago Massacre: Richard Speck', 'Seven Alone', 'Hellblock 13', 'Devil in the Flesh', 'Erik Terrell: Live at the Helium Comedy Club']
+Ground Truth: ['Putham Pudhu Kaalai ', 'Digging to Death', 'All Through the House', 'Sita Ramam']
+
+Precision@10: 0.1
+Recall@10:    0.25
+F1-Score@10:  0.1429
+{'precision': 0.1, 'recall': 0.25, 'f1_score': 0.1429}
+
+
 - Precision 0.1 berarti 10% dari rekomendasi tepat sasaran.
 - Recall 0.25 menunjukkan 25% konten relevan berhasil ditangkap.
 - F1-Score 0.1429 mencerminkan keseimbangan yang belum optimal antara precision dan recall.
@@ -404,11 +405,26 @@ Metrik yang digunakan dalam projek ini adalah Mean Squared Error (MSE) dan Root 
 
 
 
-#### Hasil Evaluation Metrics
+#### Hasil Metrik Model Collaborative Filtering
 
-1. Model berhasil belajar dengan cepat dan menyesuaikan diri terhadap data di beberapa epoch pertama.
-2. Proses pelatihan menunjukkan konvergensi yang stabil, dengan penurunan error yang konsisten.
-3. Nilai RMSE yang tetap di kisaran ~1.8 mengindikasikan bahwa masih ada ruang untuk perbaikan, kemungkinan dari segi arsitektur model, preprocessing data, atau hyperparameter tuning.
+Top 10 rekomendasi film untuk user 70:
+
+1. Title: The simulators  |  Genre: action, comedy
+2. Title: Men of the Deeps  |  Genre: documentation
+3. Title: Spirit of Love: The Mike Glenn Story  |  Genre: sport, family
+4. Title: Unity: The Latin Tribute to Michael Jackson  |  Genre: music
+5. Title: Harmony with A. R. Rahman  |  Genre: documentation, music
+6. Title: Alexander Babu: Alex in Wonderland  |  Genre: comedy
+7. Title: Water Helps the Blood Run  |  Genre: comedy, drama
+8. Title: Clarkson's Farm  |  Genre: reality, documentation, comedy
+9. Title: Stracci  |  Genre: documentation
+10. Title: Because We're Done  |  Genre: comedy
+
+A. Model berhasil belajar dengan cepat dan menyesuaikan diri terhadap data di beberapa epoch pertama.
+
+B. Proses pelatihan menunjukkan konvergensi yang stabil, dengan penurunan error yang konsisten.
+
+C. Nilai RMSE yang tetap di kisaran ~1.8 mengindikasikan bahwa masih ada ruang untuk perbaikan, kemungkinan dari segi arsitektur model, preprocessing data, atau hyperparameter tuning.
 
 
 ## Hasil Akhir Project
@@ -420,7 +436,7 @@ Setiap problem statement yang diajukan telah ditanggapi dengan solusi dan pendek
 - Memberikan alternatif tontonan yang sesuai dengan preferensi pengguna.
 
 ### Apakah berhasil mencapai setiap goals yang diharapkan?
-Goal yang diharapkan adalah menggunakan model machine learning yang mampu mengolah berbagai fitur kompleks, mengurangi overfitting dan multikolinearitas dengan regularisasi dan validasi silang, Pemilihan fitur yang relevan untuk meningkatkan akurasi model. Dengan hasil evaluasi menunjukkan bahwa
+Goal yang diharapkan adalah menggunakan model machine learning yang mampu mengolah berbagai fitur. Pemilihan fitur yang relevan untuk meningkatkan akurasi model. Dengan hasil evaluasi menunjukkan bahwa :
 
 - Menyarankan film/serial secara instan sesuai preferensi pengguna:
 Model Content-Based Filtering memberikan rekomendasi langsung berdasarkan metadata konten yang telah disukai.
