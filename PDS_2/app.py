@@ -12,7 +12,7 @@ import seaborn as sns
 from sklearn.preprocessing import LabelEncoder
 
 @st.cache_resource()
-def load_model(path='./model/best_model.joblib'):
+def load_model(path='./PDS_2/model/best_model.joblib'):
     return joblib.load(path)
 
 model = load_model()
