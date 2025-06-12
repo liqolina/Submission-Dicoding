@@ -179,7 +179,7 @@ st.markdown('---')
 col1, col2 = st.columns(2)
 with col1:
     st.subheader('Class Balance')
-    df_full = pd.read_csv('./data.csv', sep=';')
+    df_full = pd.read_csv('./PDS_2/data.csv', sep=';')
     counts = df_full['Status'].value_counts()
     fig, ax = plt.subplots()
     sns.barplot(x=counts.index, y=counts.values, ax=ax)
