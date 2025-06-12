@@ -11,12 +11,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.preprocessing import LabelEncoder
 
-# Load trained model pipeline
-@st.cache_resource()
-def load_model(path='./model/best_model.joblib'):
-    return joblib.load(path)
-
-model = load_model()
+model = './PDS_2/model/best_model.joblib'
 
 le = LabelEncoder()
 le.classes_ = np.array(['Dropout', 'Enrolled', 'Graduate'])
