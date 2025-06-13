@@ -55,75 +55,39 @@ Pendekatan ini menggunakan data interaksi pengguna, seperti penilaian (rating), 
 ## Data Understanding
 Dataset yang digunakan dalam proyek ini adalah Amazon Prime Movies and TV Shows dataset yang diperoleh dari platform Kaggle. Dataset ini berisi informasi mengenai daftar semua film dan acara TV yang tersedia di Amazon Prime. Dataset tersebut tersedia secara publik dan dapat diunduh melalui Kaggle [Amazon Prime Movies and TV Shows](https://www.kaggle.com/datasets/shivamb/amazon-prime-movies-and-tv-shows).
 
-Variabel-variabel pada Amazon Prime Movies and TV Shows dataset adalah sebagai berikut:
-- id: The title ID on JustWatch.
-- title: The name of the title.
-- show_type: TV show or movie.
-- description: A brief description.
-- release_year: The release year.
-- age_certification: The age certification.
-- runtime: The length of the episode (SHOW) or movie.
-- genres: A list of genres.
-- production_countries: A list of countries that - produced the title.
-- seasons: Number of seasons if it's a SHOW.
-- imdb_id: The title ID on IMDB.
-- imdb_score: Score on IMDB.
-- imdb_votes: Votes on IMDB.
-- tmdb_popularity: Popularity on TMDB.
-- tmdb_score: Score on TMDB.
+### Dataset Information
 
-### Feature Data:
+Variabel-variabel pada Amazon Prime Movies and TV Shows dataset beserta Feature Data adalah sebagai berikut:
+
 #### Dataset Titles
-| #  | Column               |            Non-Null Count | Dtype   |
-|----|----------------------|----------------------------|---------|
-| 0  | id                   |        10873 non-null     | object  |
-| 1  | title                |        10873 non-null     | object  |
-| 2  | type                 |        10873 non-null     | object  |
-| 3  | description          |        10729 non-null     | object  |
-| 4  | release_year         |        10873 non-null     | int64   |
-| 5  | age_certification    |         3688 non-null     | object  |
-| 6  | runtime              |        10873 non-null     | int64   |
-| 7  | genres               |        10873 non-null     | object  |
-| 8  | production_countries |        10873 non-null     | object  |
-| 9  | seasons              |         1551 non-null     | float64 |
-| 10 | imdb_id              |        10172 non-null     | object  |
-| 11 | imdb_score           |         9765 non-null     | float64 |
-| 12 | imdb_votes           |         9753 non-null     | float64 |
-| 13 | tmdb_popularity      |        10302 non-null     | float64 |
-| 14 | tmdb_score           |         8747 non-null     | float64 |
+| #  | Feature               | Non-Null Count | Dtype   | Description                                  |
+| -- | --------------------- | -------------- | ------- | -------------------------------------------- |
+| 0  | id                    | 10873 non-null | object  | The title ID on JustWatch.                   |
+| 1  | title                 | 10873 non-null | object  | The name of the title.                       |
+| 2  | type                  | 10873 non-null | object  | TV show or movie.                            |
+| 3  | description           | 10729 non-null | object  | A brief description.                         |
+| 4  | release\_year         | 10873 non-null | int64   | The release year.                            |
+| 5  | age\_certification    | 3688 non-null  | object  | The age certification.                       |
+| 6  | runtime               | 10873 non-null | int64   | The length of the episode (SHOW) or movie.   |
+| 7  | genres                | 10873 non-null | object  | A list of genres.                            |
+| 8  | production\_countries | 10873 non-null | object  | A list of countries that produced the title. |
+| 9  | seasons               | 1551 non-null  | float64 | Number of seasons if it's a SHOW.            |
+| 10 | imdb\_id              | 10172 non-null | object  | The title ID on IMDB.                        |
+| 11 | imdb\_score           | 9765 non-null  | float64 | Score on IMDB.                               |
+| 12 | imdb\_votes           | 9753 non-null  | float64 | Votes on IMDB.                               |
+| 13 | tmdb\_popularity      | 10302 non-null | float64 | Popularity on TMDB.                          |
+| 14 | tmdb\_score           | 8747 non-null  | float64 | Score on TMDB.                               |
+
 
 #### Dataset Credits
-| #   | Column     | Non-Null Count   | Dtype  |
-|-----|------------|------------------|--------|
-| 0   | person_id  | 140553 non-null  | int64  |
-| 1   | id         | 140553 non-null  | object |
-| 2   | name       | 140553 non-null  | object |
-| 3   | character  | 122705 non-null  | object |
-| 4   | role       | 140553 non-null  | object |
-
-
-
-### Missing Values: 
-
-|Missing values dalam dataset:| Value |
-|-----------|---------------|
-| id        | 0             |   
-| title     | 0             |   
-| type      | 0             |  
-| description | 144         |   
-| release_year | 0          |   
-| age_certification | 7185   |   
-| runtime   | 0             |  
-| genres    | 0             |   
-| production_countries | 0   |   
-| seasons   | 9322          |   
-| imdb_id   | 701           |   
-| imdb_score | 1108         |   
-| imdb_votes | 1120         |   
-| tmdb_popularity | 571     |   
-| tmdb_score | 2126         |   
-
-
+| # | Column     | Non-Null Count  | Dtype  | Description                   |
+| - | ---------- | --------------- | ------ | ----------------------------- |
+| 0 | person\_id | 140553 non-null | int64  | The person ID on JustWatch.   |
+| 1 | id         | 140553 non-null | object | The title ID on JustWatch.    |
+| 2 | name       | 140553 non-null | object | The actor or director's name. |
+| 3 | character  | 122705 non-null | object | The character name.           |
+| 4 | role       | 140553 non-null | object | ACTOR or DIRECTOR.            |
+  
 
 ## Exploratory Data Analysis (EDA):
 ### Tahun Rilis Terbanyak
@@ -153,7 +117,32 @@ Visualisasi menunjukkan distribusi jumlah season pada TV Show di Amazon Prime. M
 
 
 ## Data Preparation
-### Handling Missing Values
+### Model Development Content Based Filtering
+#### Missing Values pada Dataset Titles :
+1. Mengecek data pada kolom yang memiliki nilai hilang (Missing Values)
+   
+| **Kolom**             | **Missing Values (Total)** | **Missing Values (%)** |
+| --------------------- | -------------------------- | ---------------------- |
+| seasons               | 9.322                      | 85,74%                 |
+| age\_certification    | 7.185                      | 66,08%                 |
+| tmdb\_score           | 2.126                      | 19,55%                 |
+| imdb\_votes           | 1.120                      | 10,30%                 |
+| imdb\_score           | 1.108                      | 10,19%                 |
+| imdb\_id              | 701                        | 6,45%                  |
+| tmdb\_popularity      | 571                        | 5,25%                  |
+| description           | 144                        | 1,32%                  |
+| id                    | 0                          | 0%                     |
+| title                 | 0                          | 0%                     |
+| type                  | 0                          | 0%                     |
+| release\_year         | 0                          | 0%                     |
+| runtime               | 0                          | 0%                     |
+| genres                | 0                          | 0%                     |
+| production\_countries | 0                          | 0%                     |
+
+
+Berdasarkan data pada dataset, terdapat nilai hilang (missing value) yang cukup tinggi pada kolom seasons dan age_certification, yaitu dengan persentase di atas 60%. Namun untuk "seasons" tidak perlu didrop dikarenakan pada "typre : Movie" tidak ada season dan hanya perlu diisi nilai 0. Sedangkan "age_certification" untuk nilai kosong diisi "UnRated"
+
+2. Handling Missing Values
 Penanganan nilai hilang dilakukan untuk menjaga kualitas data dan menghindari bias pada model. Berikut pendekatan yang digunakan:
 
 - Kolom Age Certification akan diisi dengan data "Unrated".
@@ -161,28 +150,7 @@ Penanganan nilai hilang dilakukan untuk menjaga kualitas data dan menghindari bi
 
 Dengan penanganan missing values dapat memberikan peningkatan terhadap kinerja model dan data tidak menjadi bias.
 
-Data sebelum di perbaiki
-
-|Missing values dalam dataset:| Value |
-|-----------|---------------|
-| id        | 0             |   
-| title     | 0             |   
-| type      | 0             |  
-| description | 144         |   
-| release_year | 0          |   
-| age_certification | 7185   |   
-| runtime   | 0             |  
-| genres    | 0             |   
-| production_countries | 0   |   
-| seasons   | 9322          |   
-| imdb_id   | 701           |   
-| imdb_score | 1108         |   
-| imdb_votes | 1120         |   
-| tmdb_popularity | 571     |   
-| tmdb_score | 2126         | 
-
-
-Data setelah di perbaiki
+3. Mengecek kembali data setelah di perbaiki
 
 |Missing values dalam dataset:| Value |
 |-------------------|-----| 
@@ -206,27 +174,31 @@ Data setelah di perbaiki
 
 
 
-### Handling Data
+#### Handling Data
 Dalam dataset, ada kolom yang berisi string list. Dengan format tersebut, akan menganggu proses modeling karena adanya simbol dan lainnya.
 
 ```
 # Pastikan kolom 'genres' dan 'production_countries' adalah string
-df['genres'] = df['genres'].astype(str)
-df['production_countries'] = df['production_countries'].astype(str)
+df_titles['genres'] = df_titles['genres'].astype(str)
+df_titles['production_countries'] = df_titles['production_countries'].astype(str)
 
 # Mengekstrak genre pertama dan negara produksi pertama dari kolom yang berisi string list
-df['genres'] = df['genres'].str.replace('[', '', regex=False)\
+df_titles['genres'] = df_titles['genres'].str.replace('[', '', regex=False)\
                                    .str.replace(']', '', regex=False)\
                                    .str.replace("'", '', regex=False)
-df['genre'] = df['genres'].str.split(',').str[0].str.strip()
+df_titles['genre'] = df_titles['genres'].str.split(',').str[0].str.strip()
 ```
 
-Memisahkan Role Actor dan Director supaya mempermudah dalam pemprosesan
+Memisahkan Role "Actor" dan "Director" supaya mempermudah dalam pemprosesan
 ```
 # Pisahkan DIRECTOR
 directors = df_credits[df_credits['role'] == 'DIRECTOR'].groupby('id')['name'].first().reset_index()
 directors.columns = ['id', 'director']
 print(directors.head())
+
+actors = df_credits[df_credits['role'] == 'ACTOR'].groupby('id')['name'].apply(lambda x: ', '.join(x)).reset_index()
+actors.columns = ['id', 'cast']
+print(actors.head())
 
 df = df.merge(directors, on='id', how='left')
 ```
@@ -252,6 +224,9 @@ tfidf_matrix = tfidf.fit_transform(df_CBF['combined_features'])
 # Cek hasil vektorisasi
 print(f"TF-IDF Matrix Shape: {tfidf_matrix.shape}")
 ```
+
+### Model Development Content Based Filtering
+
 
 ## Modeling
 ### 1. Model Development Content Based Filtering
