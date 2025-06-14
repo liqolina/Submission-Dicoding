@@ -3,13 +3,13 @@ import pandas as pd
 import pickle
 
 # Load model and scaler from subfolder "models"
-with open('models/best_model_RandomForest.pkl', 'rb') as f_model:
+with open('PDS_2/models/best_model_RandomForest.pkl', 'rb') as f_model:
     model = pickle.load(f_model)
 
-with open('models/scaler.pkl', 'rb') as f_scaler:
+with open('PDS_2/models/scaler.pkl', 'rb') as f_scaler:
     scaler = pickle.load(f_scaler)
 
-with open('models/feature_columns.pkl', 'rb') as f_cols:
+with open('PDS_2/models/feature_columns.pkl', 'rb') as f_cols:
     feature_columns = pickle.load(f_cols)
 
     
