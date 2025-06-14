@@ -3,11 +3,25 @@ import pandas as pd
 import pickle
 import os
 
-# Load model and scaler from subfolder "models"
-current_dir = os.path.dirname('models')
-best_model = os.path.join(current_dir, 'best_model_RandomForest.pkl')
-scaler_model = os.path.join(current_dir, 'scaler.pkl')
-feature_model = os.path.join(current_dir, 'feature_columns.pkl')
+# Ambil direktori saat ini (yaitu tempat app.py berada)
+current_dir = os.path.dirname(__file__)
+models_dir = os.path.join(current_dir, 'models')
+
+# Path ke file dalam subfolder 'models'
+model_path = os.path.join(models_dir, 'best_model_RandomForest.pkl')
+scaler_path = os.path.join(models_dir, 'scaler.pkl')
+cols_path = os.path.join(models_dir, 'feature_columns.pkl')
+
+# Load file
+with open(model_path, 'rb') as f_model:
+    model = pickle.load(f_model)
+
+with open(scaler_path, 'rb') as f_scaler:
+    scaler = pickle.load(f_scaler)
+
+with open(cols_path, 'rb') as f_cols:
+    feature_columns = pickle.load(f_cols)
+
 
 with open('best_model', 'rb') as f_model:
     model = pickle.load(f_model)
