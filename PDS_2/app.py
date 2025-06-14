@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import pickle
+import os
 
 # Load model and scaler from subfolder "models"
 current_dir = os.path.dirname(__file__)
