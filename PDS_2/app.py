@@ -30,53 +30,68 @@ st.markdown("Isi data mahasiswa di bawah ini untuk memprediksi kemungkinan dropo
 
 # Form Input
 with st.form("dropout_form"):
+    st.header("📋 Formulir Data Mahasiswa")
+
+    # Kolom 1: Data Pribadi dan Pendaftaran
     col1, col2, col3 = st.columns(3)
-
     with col1:
-        marital_status = st.selectbox("Marital_status", [0, 1])
-        application_mode = st.number_input("Application_mode", 0, 20, 1)
-        application_order = st.number_input("Application_order", 0, 10, 1)
-        attendance = st.selectbox("Daytime_evening_attendance", [0, 1])
-        previous_qualification = st.number_input("Previous_qualification", 0, 20, 1)
-        previous_grade = st.number_input("Previous_qualification_grade", 0.0, 200.0, 150.0)
-        admission_grade = st.number_input("Admission_grade", 0.0, 200.0, 150.0)
-        displaced = st.selectbox("Displaced", [0, 1])
-        special_needs = st.selectbox("Educational_special_needs", [0, 1])
-        debtor = st.selectbox("Debtor", [0, 1])
-        tuition_paid = st.selectbox("Tuition_fees_up_to_date", [0, 1])
-        gender = st.selectbox("Gender", [0, 1])
-        scholarship_holder = st.selectbox("Scholarship_holder", [0, 1])
-        age = st.number_input("Age_at_enrollment", 15, 100, 20)
+        st.subheader("🧍 Data Pribadi")
+        marital_status = st.selectbox("Status Pernikahan", [0, 1])
+        gender = st.selectbox("Jenis Kelamin", [0, 1])
+        age = st.number_input("Usia Saat Mendaftar", 15, 100, 20)
+        is_local = st.selectbox("Domisili Lokal?", [0, 1])
+        international = st.selectbox("Mahasiswa Internasional?", [0, 1])
+        displaced = st.selectbox("Status Pengungsi?", [0, 1])
+        special_needs = st.selectbox("Berkebutuhan Khusus?", [0, 1])
+        parents_work = st.selectbox("Kedua Orang Tua Bekerja?", [0, 1])
 
+        st.subheader("🎓 Pendaftaran")
+        application_mode = st.number_input("Mode Pendaftaran", 0, 20, 1)
+        application_order = st.number_input("Urutan Pilihan", 0, 10, 1)
+        attendance = st.selectbox("Jenis Kehadiran", [0, 1])
+        previous_qualification = st.number_input("Kualifikasi Sebelumnya", 0, 20, 1)
+        previous_grade = st.number_input("Nilai Kualifikasi Sebelumnya", 0.0, 200.0, 150.0)
+        admission_grade = st.number_input("Nilai Masuk", 0.0, 200.0, 150.0)
+
+    # Kolom 2: Akademik Semester
     with col2:
-        international = st.selectbox("International", [0, 1])
-        sem1_enrolled = st.number_input("Curricular_units_1st_sem_enrolled", 0, 20, 6)
-        sem1_evals = st.number_input("Curricular_units_1st_sem_evaluations", 0, 20, 6)
-        sem1_approved = st.number_input("Curricular_units_1st_sem_approved", 0, 20, 6)
-        sem1_grade = st.number_input("Curricular_units_1st_sem_grade", 0.0, 20.0, 14.0)
-        sem1_credited = st.number_input("Curricular_units_1st_sem_credited", 0, 20, 0)
-        sem1_wo_eval = st.number_input("Curricular_units_1st_sem_without_evaluations", 0, 10, 0)
-        sem2_enrolled = st.number_input("Curricular_units_2nd_sem_enrolled", 0, 20, 6)
-        sem2_evals = st.number_input("Curricular_units_2nd_sem_evaluations", 0, 20, 6)
-        sem2_approved = st.number_input("Curricular_units_2nd_sem_approved", 0, 20, 6)
-        sem2_grade = st.number_input("Curricular_units_2nd_sem_grade", 0.0, 20.0, 14.0)
-        sem2_credited = st.number_input("Curricular_units_2nd_sem_credited", 0, 20, 0)
-        sem2_wo_eval = st.number_input("Curricular_units_2nd_sem_without_evaluations", 0, 10, 0)
+        st.subheader("📚 Semester 1")
+        sem1_enrolled = st.number_input("Jumlah Mata Kuliah", 0, 20, 6)
+        sem1_evals = st.number_input("Jumlah Evaluasi", 0, 20, 6)
+        sem1_approved = st.number_input("Mata Kuliah Lulus", 0, 20, 6)
+        sem1_grade = st.number_input("Rata-rata Nilai", 0.0, 20.0, 14.0)
+        sem1_credited = st.number_input("SKS Diterima", 0, 20, 0)
+        sem1_wo_eval = st.number_input("Tanpa Evaluasi", 0, 10, 0)
 
+        st.subheader("📘 Semester 2")
+        sem2_enrolled = st.number_input("Jumlah Mata Kuliah", 0, 20, 6)
+        sem2_evals = st.number_input("Jumlah Evaluasi", 0, 20, 6)
+        sem2_approved = st.number_input("Mata Kuliah Lulus", 0, 20, 6)
+        sem2_grade = st.number_input("Rata-rata Nilai", 0.0, 20.0, 14.0)
+        sem2_credited = st.number_input("SKS Diterima", 0, 20, 0)
+        sem2_wo_eval = st.number_input("Tanpa Evaluasi", 0, 10, 0)
+
+    # Kolom 3: Sosial Ekonomi & Orang Tua
     with col3:
-        unemployment = st.number_input("Unemployment_rate", 0.0, 100.0, 6.5)
-        inflation = st.number_input("Inflation_rate", -10.0, 100.0, 1.2)
-        gdp = st.number_input("GDP", 0.0, 1000.0, 180.0)
-        course_group = st.number_input("Course_group", 0, 10, 1)
-        is_local = st.selectbox("Is_local", [0, 1])
-        mother_edu = st.number_input("Mother_edu_level", 0, 10, 3)
-        father_edu = st.number_input("Father_edu_level", 0, 10, 4)
-        mother_job = st.number_input("Mother_job", 0, 20, 10)
-        father_job = st.number_input("Father_job", 0, 20, 10)
-        edu_gap = st.number_input("Parental_education_gap", -10, 10, -1)
-        parents_work = st.selectbox("Is_both_parents_employed", [0, 1])
+        st.subheader("💰 Sosial Ekonomi")
+        debtor = st.selectbox("Status Penunggak", [0, 1])
+        tuition_paid = st.selectbox("Biaya Kuliah Terbayar?", [0, 1])
+        scholarship_holder = st.selectbox("Penerima Beasiswa?", [0, 1])
 
-    submitted = st.form_submit_button("Prediksi")
+        unemployment = st.number_input("Tingkat Pengangguran (%)", 0.0, 100.0, 6.5)
+        inflation = st.number_input("Tingkat Inflasi (%)", -10.0, 100.0, 1.2)
+        gdp = st.number_input("GDP", 0.0, 1000.0, 180.0)
+        course_group = st.number_input("Kelompok Jurusan", 0, 10, 1)
+
+        st.subheader("👨‍👩‍👧 Orang Tua")
+        mother_edu = st.number_input("Pendidikan Ibu", 0, 10, 3)
+        father_edu = st.number_input("Pendidikan Ayah", 0, 10, 4)
+        mother_job = st.number_input("Pekerjaan Ibu", 0, 20, 10)
+        father_job = st.number_input("Pekerjaan Ayah", 0, 20, 10)
+        edu_gap = st.number_input("Gap Pendidikan Ortu", -10, 10, -1)
+
+    # Tombol Submit
+    submitted = st.form_submit_button("🔍 Prediksi")
 
     if submitted:
         input_dict = {
@@ -120,7 +135,6 @@ with st.form("dropout_form"):
             "Is_both_parents_employed": parents_work
         }
 
-        # DataFrame, Reindex, Scaling, dan Prediksi
         input_df = pd.DataFrame([input_dict])
         input_df = input_df.reindex(columns=feature_columns, fill_value=0)
         scaled_input = scaler.transform(input_df)
