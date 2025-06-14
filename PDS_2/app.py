@@ -37,21 +37,56 @@ with st.form("dropout_form"):
     # ===== Kolom 1: Data Pribadi & Pendaftaran =====
     with col1:
         st.subheader("🧍 Data Pribadi")
-        marital_status = st.selectbox("Status Pernikahan", [0, 1], key="marital_status")
-        gender = st.selectbox("Jenis Kelamin", [0, 1], key="gender")
+        marital_status_map = {
+            "Single": 1,
+            "Married": 2,
+            "Widowed": 3,
+            "Divorced": 4,
+            "Facto Union": 5,
+            "Legally Separated": 6
+        }
+        marital_status_label = st.selectbox("Status Pernikahan", list(marital_status_map.keys()))
+        marital_status = marital_status_map[marital_status_label]
+        
+        gender_map = {"Perempuan": 0, "Laki-laki": 1}
+        gender_label = st.selectbox("Jenis Kelamin", list(gender_map.keys()))
+        gender = gender_map[gender_label]
+
         age = st.number_input("Usia Saat Mendaftar", 15, 100, 20, key="age")
-        is_local = st.selectbox("Domisili Lokal?", [0, 1], key="is_local")
-        international = st.selectbox("Mahasiswa Internasional?", [0, 1], key="international")
-        displaced = st.selectbox("Status Pengungsi?", [0, 1], key="displaced")
-        special_needs = st.selectbox("Berkebutuhan Khusus?", [0, 1], key="special_needs")
-        parents_work = st.selectbox("Kedua Orang Tua Bekerja?", [0, 1], key="parents_work")
+        
+        local_map = {"Bukan Lokal": 0, "Lokal": 1}
+        is_local_label = st.selectbox("Domisili Lokal?", list(local_map.keys()))
+        is_local = local_map[is_local_label]
+
+        int_map = {"Bukan Internasional": 0, "Internasional": 1}
+        international_label = st.selectbox("Mahasiswa Internasional?", list(int_map.keys()))
+        international = int_map[international_label]
+
+        displaced_map = {"Tidak": 0, "Ya": 1}
+        displaced_label = st.selectbox("Status Pengungsi?", list(displaced_map.keys()))
+        displaced = displaced_map[displaced_label]
+
+        special_map = {"Tidak": 0, "Ya": 1}
+        special_needs_label = st.selectbox("Berkebutuhan Khusus?", list(special_map.keys()))
+        special_needs = special_map[special_needs_label]
+
+        parents_work_map = {"Tidak Keduanya": 0, "Keduanya Bekerja": 1}
+        parents_work_label = st.selectbox("Kedua Orang Tua Bekerja?", list(parents_work_map.keys()))
+        parents_work = parents_work_map[parents_work_label]
 
         st.subheader("🎓 Pendaftaran")
         application_mode = st.number_input("Mode Pendaftaran", 0, 20, 1, key="application_mode")
+        
         application_order = st.number_input("Urutan Pilihan", 0, 10, 1, key="application_order")
-        attendance = st.selectbox("Jenis Kehadiran", [0, 1], key="attendance")
+        
+        attendance_map = {"Evening": 0, "Daytime": 1}
+        attendance_label = st.selectbox("Jenis Kehadiran", list(attendance_map.keys()))
+        attendance = attendance_map[attendance_label]
+
         previous_qualification = st.number_input("Kualifikasi Sebelumnya", 0, 20, 1, key="previous_qualification")
+       
         previous_grade = st.number_input("Nilai Kualifikasi Sebelumnya", 0.0, 200.0, 150.0, key="previous_grade")
+       
         admission_grade = st.number_input("Nilai Masuk", 0.0, 200.0, 150.0, key="admission_grade")
 
     # ===== Kolom 2: Data Akademik Semester =====
@@ -75,9 +110,17 @@ with st.form("dropout_form"):
     # ===== Kolom 3: Sosial Ekonomi & Orang Tua =====
     with col3:
         st.subheader("💰 Sosial Ekonomi")
-        debtor = st.selectbox("Penunggak Biaya?", [0, 1], key="debtor")
-        tuition_paid = st.selectbox("Biaya Kuliah Terbayar?", [0, 1], key="tuition_paid")
-        scholarship_holder = st.selectbox("Penerima Beasiswa?", [0, 1], key="scholarship_holder")
+        debtor_map = {"Bukan Penunggak": 0, "Penunggak": 1}
+        debtor_label = st.selectbox("Penunggak Biaya?", list(debtor_map.keys()))
+        debtor = debtor_map[debtor_label]
+
+        tuition_paid_map = {"Belum Terbayar": 0, "Sudah Terbayar": 1}
+        tuition_paid_label = st.selectbox("Biaya Kuliah Terbayar?", list(tuition_paid_map.keys()))
+        tuition_paid = tuition_paid_map[tuition_paid_label]
+
+        scholarship_map = {"Bukan Penerima": 0, "Penerima": 1}
+        scholarship_holder_label = st.selectbox("Penerima Beasiswa?", list(scholarship_map.keys()))
+        scholarship_holder = scholarship_map[scholarship_holder_label]
 
         unemployment = st.number_input("Tingkat Pengangguran (%)", 0.0, 100.0, 6.5, key="unemployment")
         inflation = st.number_input("Tingkat Inflasi (%)", -10.0, 100.0, 1.2, key="inflation")
