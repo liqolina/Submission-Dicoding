@@ -147,6 +147,9 @@ Penanganan nilai hilang dilakukan untuk menjaga kualitas data dan menghindari bi
 
 - Kolom Age Certification akan diisi dengan data "Unrated".
 - Kolom seasons akan diisi dengan nilai 0 untuk konten jenis Movie yang memang tidak memiliki season.
+- Kolom imdb_score, tmdb_score, dan tmdb_popularity akan diisi dengan nilai rata-rata.
+- Kolom imdb_votes akan diisi dengan nilai 0 karena tidak ada yang menvoting oleh user
+- Kolom description akan diisi dengan data "No description available.".
 
 Dengan penanganan missing values dapat memberikan peningkatan terhadap kinerja model dan data tidak menjadi bias.
 
@@ -175,13 +178,17 @@ Dengan penanganan missing values dapat memberikan peningkatan terhadap kinerja m
 
 
 #### Handling Data
-Dalam dataset, ada kolom yang berisi string list. Dengan format tersebut, akan menganggu proses modeling karena adanya simbol dan lainnya.
+- Memaskikan kolom 'genres' dan 'production_countries' dengan format string
 
 ```
 # Pastikan kolom 'genres' dan 'production_countries' adalah string
 df_titles['genres'] = df_titles['genres'].astype(str)
 df_titles['production_countries'] = df_titles['production_countries'].astype(str)
+```
 
+- Dalam dataset, ada kolom yang berisi string list. Dengan format tersebut, akan menganggu proses modeling karena adanya simbol dan lainnya.
+
+```
 # Mengekstrak genre pertama dan negara produksi pertama dari kolom yang berisi string list
 df_titles['genres'] = df_titles['genres'].str.replace('[', '', regex=False)\
                                    .str.replace(']', '', regex=False)\
@@ -189,7 +196,8 @@ df_titles['genres'] = df_titles['genres'].str.replace('[', '', regex=False)\
 df_titles['genre'] = df_titles['genres'].str.split(',').str[0].str.strip()
 ```
 
-Memisahkan Role "Actor" dan "Director" supaya mempermudah dalam pemprosesan
+- Memisahkan Role "Actor" dan "Director" supaya mempermudah dalam pemprosesan
+  
 ```
 # Pisahkan DIRECTOR
 directors = df_credits[df_credits['role'] == 'DIRECTOR'].groupby('id')['name'].first().reset_index()
@@ -203,11 +211,24 @@ print(actors.head())
 df = df.merge(directors, on='id', how='left')
 ```
 
+- Duplikat Dataset dan Merge director dan actor
+Menduplikat dataset bertujuan untuk backup apabila terdapat kekacauan data akibat perubahan.
+Kemudian menggabungkan kolom direktor dan kolom actor ke df_clean.
+
+```
+df_clean=df_titles.copy()
+
+df_clean = df_clean.merge(directors, on='id', how='left')
+df_clean = df_clean.merge(actors, on='id', how='left')
+```
 
 ### Feature Engineering
 Menggabungkan berbagai kolom teks (seperti title, director, cast, genres, dan description) menjadi satu kolom baru content. Hal ini dilakukan untuk memberikan representasi teks yang lebih komprehensif tentang film atau acara yang ada. Dan membuat fitur gabungan untuk pendekatan Content-Based Filtering
 
 ```
+# Duplikat data
+df_CBF=df_clean.copy()
+
 # Ambil kolom yang relevan
 df_CBF['combined_features'] = df_CBF[['title', 'description', 'cast', 'genres', 'director']] \
                     .fillna('').agg(' '.join, axis=1)
@@ -225,24 +246,101 @@ tfidf_matrix = tfidf.fit_transform(df_CBF['combined_features'])
 print(f"TF-IDF Matrix Shape: {tfidf_matrix.shape}")
 ```
 
-### Model Development Content Based Filtering
+### Model Development Collaborative Filtering
+#### Imitasi UserId dan Rating
+Dari penelusuran dataset sumber terbuka ini bahwa belum memiliki User_Id yang di dapatkan namun Untuk Rating hanya mendapatkan data rata-rata pada imdb_score. Kemudian dari dataset lain yang ada ratingnya memiliki size file yang besar.
+
+- Membuat User_Id secara acak sebanyak 1000 pengguna untuk setiap film (id) dari 500 film yang tersedia di kolom id.
+
+- Membuat kolom Rating yang mengikuti nilai imdb_score dari masing-masing film (menambah variasi kecil agar tidak seragam persis).
+
+Dari tahapan itu, dapat menciptakan data ideal untuk Collaborative Filtering.
 
 
 ## Modeling
 ### 1. Model Development Content Based Filtering
+
 Digunakan untuk merekomendasikan film atau TV show berdasarkan kemiripan konten seperti genre, deskripsi, sutradara, dll. Dengan menggunakan pendekatan matrix factorization melalui embedding layer dan neural network sederhana.
 
-- Parameter : 
--- Vectorizer: `TfidfVectorizer(stop_words='english')`
--- Similarity Measure: `cosine_similarity(tfidf_matrix)`
+- Parameter :
+  
+a. Vectorizer: `TfidfVectorizer(stop_words='english')`
+b. Similarity Measure: `cosine_similarity(tfidf_matrix)`
     
 - Kelebihan :
--- Personal dan tidak memerlukan data pengguna lain.
--- Bekerja baik untuk pengguna baru.
+  
+a. Personal dan tidak memerlukan data pengguna lain.
+b. Bekerja baik untuk pengguna baru.
   
 - Kekurangan :
--- Rentan terhadap rekomendasi monoton (konten terlalu mirip).
--- Bergantung pada kualitas metadata.
+  
+a. Rentan terhadap rekomendasi monoton (konten terlalu mirip).
+b. Bergantung pada kualitas metadata.
+
+A) Menghitung kemiripan antar film berdasarkan kontennya, menggunakan Cosine Similarity.
+
+```
+# Hitung kemiripan antar konten
+cosine_sim = cosine_similarity(tfidf_matrix, tfidf_matrix)
+
+# Buat mapping antara judul dan index DataFrame
+indices = pd.Series(df_clean.index, index=df_CBF['title'].str.lower()).drop_duplicates()
+```
+
+tfidf_matrix adalah matriks fitur dari teks (misalnya sinopsis film) yang telah diubah menggunakan TF-IDF Vectorizer.
+
+B. Matriks Kemiripan Antar Judul
+
+Digunakan untuk melihat atau mengakses kemiripan antar film berdasarkan judul secara langsung.
+
+| **title**                               | **Open Graves** | **Digging to Death** | **The Grand Tour** | **Maze** | **Sita Ramam** |
+| --------------------------------------- | --------------- | -------------------- | ------------------ | -------- | -------------- |
+| **Open Graves**                         | 1.000000        | 0.005245             | 0.007073           | 0.007780 | 0.000000       |
+| **Digging to Death**                    | 0.005245        | 1.000000             | 0.018771           | 0.003384 | 0.006124       |
+| **The Grand Tour**                      | 0.007073        | 0.018771             | 1.000000           | 0.022093 | 0.000000       |
+| **Maze**                                | 0.007780        | 0.003384             | 0.022093           | 1.000000 | 0.000933       |
+| **Sita Ramam**                          | 0.000000        | 0.006124             | 0.000000           | 0.000933 | 1.000000       |
+| **All Through the House**               | 0.027390        | 0.022807             | 0.000000           | 0.000000 | 0.000000       |
+| **Avenge the Crows**                    | 0.001659        | 0.002299             | 0.000000           | 0.008271 | 0.003750       |
+| **Befikre**                             | 0.000000        | 0.010009             | 0.003108           | 0.001402 | 0.011051       |
+| **The Adventures of Ozzie and Harriet** | 0.000000        | 0.011166             | 0.002183           | 0.000985 | 0.000477       |
+| **Putham Pudhu Kaalai**                 | 0.000000        | 0.000000             | 0.000000           | 0.000970 | 0.061185       |
+
+#### Sistem Rekomendasi
+Membuat sistem rekomendasi berbasis konten (Content-Based Filtering), yang merekomendasikan film atau acara TV yang mirip dengan sebuah judul tertentu, berdasarkan kemiripan teks (misalnya sinopsis) yang dihitung dengan cosine similarity.
+
+| **No** | **Title**             | **Type** | **Genres**                      | **Description**                                            | **Similarity Score** |
+| -----: | --------------------- | -------- | ------------------------------- | ---------------------------------------------------------- | -------------------: |
+|      1 | Bullitt County        | MOVIE    | action, drama, thriller         | An action/thriller set in 1977 about four friends...       |             0.115214 |
+|      2 | At Granny's House     | MOVIE    | thriller                        | A typical Midwest house. A sweet little old lady...        |             0.112151 |
+|      3 | Bleed                 | MOVIE    | horror, thriller                | A naïve young girl desperate to fit in with her...         |             0.108470 |
+|      4 | Karma                 | MOVIE    | drama, thriller, comedy, action | When senior police inspector Vishwa Pratap Singh...        |             0.098885 |
+|      5 | The Handler           | MOVIE    | action, drama, thriller, crime  | After throwing a job, an ex-Marine seeks refuge...         |             0.097815 |
+|      6 | Sniper Corpse         | MOVIE    | horror                          | The undead are former militia soldiers that are...         |             0.095206 |
+|      7 | The Bat               | MOVIE    | horror, thriller                | Mystery writer Cornelia Van Gorder has rented...           |             0.094364 |
+|      8 | House on Haunted Hill | MOVIE    | horror, crime                   | Frederick Loren has invited five strangers to...           |             0.089328 |
+|      9 | Devil in the Flesh    | MOVIE    | horror, thriller                | When her mother is killed in a mysterious house...         |             0.084746 |
+|     10 | Three Pines           | SHOW     | crime, drama                    | Chief Inspector Armand Gamache and his team investigate... |             0.084620 |
+
+#### Evaluasi Model Development Content Based Filtering
+Untuk mengevaluasi seberapa baik sistem rekomendasi, khususnya sistem rekomendasi berbasis konten (Content-Based Filtering / CBF) menggunakan metrik informasi retrieval:
+
+- Precision@K
+- Recall@K
+- F1-Score@K
+
+Berikut hasil dari evaluate_recommendation_system
+
+Evaluation for: 'Bleed'
+Top-10 Recommendations: ['DIVE!!', 'Digging to Death', 'Girl, Chill', 'Twinsanity', 'Cave Club', 'Chicago Massacre: Richard Speck', 'Seven Alone', 'Hellblock 13', 'Devil in the Flesh', 'Erik Terrell: Live at the Helium Comedy Club']
+Ground Truth: ['Putham Pudhu Kaalai ', 'Digging to Death', 'All Through the House', 'Sita Ramam']
+
+Precision@10: 0.1
+Recall@10:    0.25
+F1-Score@10:  0.1429
+{'precision': 0.1, 'recall': 0.25, 'f1_score': 0.1429}
+
+Bedasarkan hasil evaluasi ini sistem rekomendasi masih perlu ditingkatkan, terutama dalam memahami konteks film yang relevan secara semantik.
 
 ### 2. Model Development Collaborative Filtering
 Digunakan untuk merekomendasikan film atau TV show berdasarkan kemiripan konten seperti genre, deskripsi, sutradara, dll.
@@ -251,13 +349,15 @@ Digunakan untuk merekomendasikan film atau TV show berdasarkan kemiripan konten 
 -- Embedding(input_dim=num_users, output_dim=50)
 -- Flatten()
 -- Concatenate()
--- Dense(64, activation='relu')
--- Dense(1)
+-- Dense(128, activation='relu')(merged)
+-- Dropout(0.3)(x)
+-- Dense(64, activation='relu')(x)
+-- Dense(1)(x)
 
 - Parameter Pelatihan:
 -- Optimizer: Adam
 -- Loss: Mean Squared Error
--- Epochs: 40
+-- Epochs: 20
 -- Batch Size: 64
 
 - Kelebihan :
@@ -267,16 +367,96 @@ Digunakan untuk merekomendasikan film atau TV show berdasarkan kemiripan konten 
 - Kekurangan :
 -- Tidak bekerja optimal untuk pengguna/item baru (cold-start).
 -- Membutuhkan volume data besar dan preprocessing tambahan.
+  
+a. Memaskikan kolom 'user_id' dan 'id' dengan format string
 
-Dan tambahan Sistem Rekomendasi Menggunakan Collaborative Filltering
-    
+Agar bisa digunakan dalam Collaborative Filtering (CF), terutama dengan algoritma berbasis matrix factorization
+```
+# mengubah kolom "user_id" menjadi tipe data category
+df_CF['user_id']=df_CF['user_id'].astype('category').cat.codes
+
+movie_id_mapping = dict(enumerate(df_CF['id'].astype('category').cat.categories))
+df_CF['id'] = df_CF['id'].astype('category').cat.codes
+```
+
+b. Split data menjadi data latih dan uji dan mempersiapkan input untuk model
+
+- Membagi dataset df_CF menjadi:
+    - 80% untuk pelatihan (train_data)
+    - 20% untuk pengujian (test_data)
+  
+- Parameter random_state=42 memastikan hasilnya reproducible
+- Mengkonversi input ke int32
+    ```
+    train_user_input = train_data['user_id'].values.astype(np.int32)
+    ```
+
+
+#### Neural Collaborative Filtering (NCF)    
+Membangun model prediksi rating berdasarkan user ID dan item (movie) ID dengan pendekatan embedding dan dense layers. Terdapat fungsi masing masing dalam NFC :
+
+| Fungsi                       | Penjelasan                                                      |
+| ---------------------------- | --------------------------------------------------------------- |
+| Membuat embedding            | Mewakili user dan item sebagai vektor yang bisa dipelajari      |
+| Bangun jaringan neural       | Gunakan dense layers untuk prediksi rating                      |
+| Compile model                | Melatih dengan optimisasi dan metrik evaluasi        |
+| RMSE sebagai metrik tambahan | Memberi gambaran lebih jelas terhadap kesalahan prediksi rating |
+
+
+**Model: "functional"** 
+
+| **Layer (Type)**             | **Output Shape** | **Param #** | **Connected to**                    |
+| ---------------------------- | ---------------- | ----------- | ----------------------------------- |
+| input\_layer (InputLayer)    | (None, 1)        | 0           | -                                   |
+| input\_layer\_1 (InputLayer) | (None, 1)        | 0           | -                                   |
+| embedding (Embedding)        | (None, 1, 50)    | 50,000      | input\_layer\[0]\[0]                |
+| embedding\_1 (Embedding)     | (None, 1, 50)    | 25,000      | input\_layer\_1\[0]\[0]             |
+| flatten (Flatten)            | (None, 50)       | 0           | embedding\[0]\[0]                   |
+| flatten\_1 (Flatten)         | (None, 50)       | 0           | embedding\_1\[0]\[0]                |
+| concatenate (Concatenate)    | (None, 100)      | 0           | flatten\[0]\[0], flatten\_1\[0]\[0] |
+| dense (Dense)                | (None, 128)      | 12,928      | concatenate\[0]\[0]                 |
+| dropout (Dropout)            | (None, 128)      | 0           | dense\[0]\[0]                       |
+| dense\_1 (Dense)             | (None, 64)       | 8,256       | dropout\[0]\[0]                     |
+| dense\_2 (Dense)             | (None, 1)        | 65          | dense\_1\[0]\[0]                    |
+
+
+- Training model Collaborative Filtering
+Digunakan untuk melatih model rekomendasi berbasis Neural Collaborative Filtering (NCF) yang sudah dibuat sebelumnya.
+
+![Epoch](https://github.com/user-attachments/assets/8ddbfa69-2d90-43b3-9f51-b664b286cbf2)
+
+
+Dari hasil yang didapatkan bahwa model telah berhasil dilatih secara stabil, dan saat ini mencapai rata-rata kesalahan prediksi rating sebesar ±1.31. Ini menunjukkan model sudah belajar cukup baik, namun masih memiliki ruang untuk ditingkatkan
+
+- Fungsi rekomendasi film berdasarkan prediksi rating
+Bertujuan untuk menghasilkan rekomendasi film untuk pengguna tertentu berdasarkan prediksi rating dari model Neural Collaborative Filtering (NCF) yang telah dilatih sebelumnya.
+
+Top 10 rekomendasi film untuk user 445:
+| **No.** | **Title**                   | **Genres**                                    | **Type** | **IMDb Score** | **TMDb Score** |
+| ------: | --------------------------- | --------------------------------------------- | -------- | -------------- | -------------- |
+|       1 | It's a Wonderful Life       | drama, family, fantasy, romance, comedy       | MOVIE    | 8.6            | 8.261          |
+|       2 | The Three Stooges           | comedy, family                                | SHOW     | 8.5            | 7.6            |
+|       3 | The Jack Benny Program      | comedy                                        | SHOW     | 8.6            | 7.5            |
+|       4 | The Best Years of Our Lives | drama, romance, war                           | MOVIE    | 8.1            | 7.838          |
+|       5 | The Little Foxes            | drama, romance                                | MOVIE    | 7.9            | 7.549          |
+|       6 | The Gold Rush               | drama, comedy, romance, western, family       | MOVIE    | 8.1            | 8.03           |
+|       7 | The General                 | comedy, drama, action, war, western, european | MOVIE    | 8.1            | 8.009          |
+|       8 | My Man Godfrey              | comedy, drama, romance                        | MOVIE    | 8.0            | 7.56           |
+|       9 | Scarlet Street              | drama, thriller, crime                        | MOVIE    | 7.8            | 7.6            |
+|      10 | What's My Line?             | reality, family                               | SHOW     | 8.5            | 7.2            |
+
+
+#### Evaluasi Collaborative Filtering
+![EvaluationCF](https://github.com/user-attachments/assets/9714d906-172f-439f-a199-39ca439fcb3c)
+
+
 ### Improvement Process
 - Collaborative Filtering mampu menyediakan rekomendasi yang lebih variatif dan personal dengan memanfaatkan pola interaksi pengguna.
 - Content-Based Filtering memberikan rekomendasi yang konsisten bagi pengguna dengan riwayat preferensi yang jelas, namun cenderung menghasilkan rekomendasi yang kurang beragam karena fokus pada konten serupa
 
 
 ### Model Terbaik pada Solution Statement
-Bedasarkan hasil modeling bahwa Collaborative Filtering lebih unggul untuk digunakan sebagai model utama karena mampu memberikan prediksi yang lebih akurat terhadap preferensi pengguna. Sementara itu, Content-Based Filtering tetap dapat dimanfaatkan sebagai pelengkap, khususnya untuk menangani kasus cold-start (pengguna baru) atau ketika data interaksi pengguna masih terbatas.
+Bedasarkan hasil modeling bahwa Collaborative Filtering kurang baik untuk digunakan sebagai model utama karena belum mampu memberikan prediksi yang lebih akurat terhadap preferensi pengguna. Sementara itu, Content-Based Filtering dapat digunakan sebagai model utama karena hasil loss yang rendah.
 
 ## Evaluation
 Projek ini berfokus pada model Content Based Filtering dan model Collaborative Filtering. Tujuan dari proyek ini adalah mengembangkan model Machine Learning yang mampu memberikan referensi movie maupun TV series sesuai dengan referensi pengguna. Dengan menggunakan pendekatan utama dalam sistem rekomendasi dapat memberikan hasil yang baik untuk pengguna.
@@ -382,18 +562,21 @@ Metrik yang digunakan dalam projek ini adalah Mean Squared Error (MSE) dan Root 
 
 #### Hasil Metrik Model Collaborative Filtering
 
-Top 10 rekomendasi film untuk user 70:
+Top 10 rekomendasi film untuk user 445:
+| **No.** | **Title**                   | **Genres**                                    | **Type** | **IMDb Score** | **TMDb Score** |
+| ------: | --------------------------- | --------------------------------------------- | -------- | -------------- | -------------- |
+|       1 | It's a Wonderful Life       | drama, family, fantasy, romance, comedy       | MOVIE    | 8.6            | 8.261          |
+|       2 | The Three Stooges           | comedy, family                                | SHOW     | 8.5            | 7.6            |
+|       3 | The Jack Benny Program      | comedy                                        | SHOW     | 8.6            | 7.5            |
+|       4 | The Best Years of Our Lives | drama, romance, war                           | MOVIE    | 8.1            | 7.838          |
+|       5 | The Little Foxes            | drama, romance                                | MOVIE    | 7.9            | 7.549          |
+|       6 | The Gold Rush               | drama, comedy, romance, western, family       | MOVIE    | 8.1            | 8.03           |
+|       7 | The General                 | comedy, drama, action, war, western, european | MOVIE    | 8.1            | 8.009          |
+|       8 | My Man Godfrey              | comedy, drama, romance                        | MOVIE    | 8.0            | 7.56           |
+|       9 | Scarlet Street              | drama, thriller, crime                        | MOVIE    | 7.8            | 7.6            |
+|      10 | What's My Line?             | reality, family                               | SHOW     | 8.5            | 7.2            |
 
-1. Title: The simulators  |  Genre: action, comedy
-2. Title: Men of the Deeps  |  Genre: documentation
-3. Title: Spirit of Love: The Mike Glenn Story  |  Genre: sport, family
-4. Title: Unity: The Latin Tribute to Michael Jackson  |  Genre: music
-5. Title: Harmony with A. R. Rahman  |  Genre: documentation, music
-6. Title: Alexander Babu: Alex in Wonderland  |  Genre: comedy
-7. Title: Water Helps the Blood Run  |  Genre: comedy, drama
-8. Title: Clarkson's Farm  |  Genre: reality, documentation, comedy
-9. Title: Stracci  |  Genre: documentation
-10. Title: Because We're Done  |  Genre: comedy
+
 
 A. Model berhasil belajar dengan cepat dan menyesuaikan diri terhadap data di beberapa epoch pertama.
 
