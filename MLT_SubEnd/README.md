@@ -147,7 +147,7 @@ Penanganan nilai hilang dilakukan untuk menjaga kualitas data dan menghindari bi
 
 - Kolom Age Certification akan diisi dengan data "Unrated".
 - Kolom seasons akan diisi dengan nilai 0 untuk konten jenis Movie yang memang tidak memiliki season.
-- Kolom imdb_score, tmdb_score, dan tmdb_popularity akan diisi dengan nilai rata-rata.
+- Kolom imdb_score, tmdb_score, dan tmdb_popularity akan diisi dengan nilai tengah.
 - Kolom imdb_votes akan diisi dengan nilai 0 karena tidak ada yang menvoting oleh user
 - Kolom description akan diisi dengan data "No description available.".
 
@@ -255,6 +255,50 @@ Dari penelusuran dataset sumber terbuka ini bahwa belum memiliki User_Id yang di
 - Membuat kolom Rating yang mengikuti nilai imdb_score dari masing-masing film (menambah variasi kecil agar tidak seragam persis).
 
 Dari tahapan itu, dapat menciptakan data ideal untuk Collaborative Filtering.
+
+#### Mengubah kolom 'user_id' dan 'id' dengan format string
+
+Agar bisa digunakan dalam Collaborative Filtering (CF), terutama dengan algoritma berbasis matrix factorization
+```
+# mengubah kolom "user_id" menjadi tipe data category
+df_CF['user_id']=df_CF['user_id'].astype('category').cat.codes
+
+movie_id_mapping = dict(enumerate(df_CF['id'].astype('category').cat.categories))
+df_CF['id'] = df_CF['id'].astype('category').cat.codes
+```
+
+#### Split data menjadi data latih dan uji
+Memisahkan data pelatihan dan pengujian, merupakan langkah dalam proses training dan pengujian model.
+
+Fungsi train_test_split dari pustaka scikit-learn digunakan untuk membagi dataset menjadi dua bagian, yaitu:
+
+- Data pelatihan (training set) → digunakan untuk melatih model
+- Data pengujian (test set) → digunakan untuk menguji performa model
+
+```
+# Bagi data
+train_data, test_data = train_test_split(df_CF, test_size=0.2, random_state=42)
+```
+
+- Membagi dataset df_CF menjadi:
+    - 80% untuk pelatihan (train_data)
+    - 20% untuk pengujian (test_data)
+  
+- Parameter random_state=42 memastikan hasilnya reproducible
+  
+#### Persiapan input untuk model
+menyiapkan data pelatihan dan data pengujian dalam bentuk array numerik untuk dimasukkan ke dalam model
+  
+    ```
+    # Ambil input dan konversi ke int32
+    train_user_input = train_data['user_id'].values.astype(np.int32)
+    train_item_input = train_data['id'].values.astype(np.int32)
+    train_ratings = train_data['rating'].values.astype(np.float32)
+    
+    test_user_input = test_data['user_id'].values.astype(np.int32)
+    test_item_input = test_data['id'].values.astype(np.int32)
+    test_ratings = test_data['rating'].values.astype(np.float32)
+    ```
 
 
 ## Modeling
@@ -372,30 +416,6 @@ Digunakan untuk merekomendasikan film atau TV show berdasarkan kemiripan konten 
 - Kekurangan :
 -- Tidak bekerja optimal untuk pengguna/item baru (cold-start).
 -- Membutuhkan volume data besar dan preprocessing tambahan.
-  
-a. Memaskikan kolom 'user_id' dan 'id' dengan format string
-
-Agar bisa digunakan dalam Collaborative Filtering (CF), terutama dengan algoritma berbasis matrix factorization
-```
-# mengubah kolom "user_id" menjadi tipe data category
-df_CF['user_id']=df_CF['user_id'].astype('category').cat.codes
-
-movie_id_mapping = dict(enumerate(df_CF['id'].astype('category').cat.categories))
-df_CF['id'] = df_CF['id'].astype('category').cat.codes
-```
-
-b. Split data menjadi data latih dan uji dan mempersiapkan input untuk model
-
-- Membagi dataset df_CF menjadi:
-    - 80% untuk pelatihan (train_data)
-    - 20% untuk pengujian (test_data)
-  
-- Parameter random_state=42 memastikan hasilnya reproducible
-- Mengkonversi input ke int32
-    ```
-    train_user_input = train_data['user_id'].values.astype(np.int32)
-    ```
-
 
 #### Neural Collaborative Filtering (NCF)    
 Membangun model prediksi rating berdasarkan user ID dan item (movie) ID dengan pendekatan embedding dan dense layers. Terdapat fungsi masing masing dalam NFC :
