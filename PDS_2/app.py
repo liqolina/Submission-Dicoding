@@ -4,7 +4,7 @@ import pickle
 import os
 
 # Load model and scaler from subfolder "models"
-current_dir = os.path.dirname(_file_)
+current_dir = os.path.dirname('PDS_2')
 best_model = os.path.join(current_dir, 'models', 'best_model_RandomForest.pkl')
 scaler_model = os.path.join(current_dir, 'models', 'scaler.pkl')
 feature_model = os.path.join(current_dir, 'models', 'feature_columns.pkl')
