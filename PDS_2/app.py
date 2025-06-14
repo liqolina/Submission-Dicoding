@@ -142,26 +142,26 @@ with st.form("dropout_form"):
         pred = model.predict(scaled_input)[0]
         prob = model.predict_proba(scaled_input)[0][1]
 
-if pred == 1:
-    st.error("🔴 **Prediksi: Berisiko Dropout**")
-    st.markdown("🚨 Mahasiswa ini memiliki kemungkinan **tinggi** untuk mengalami *dropout*. Perlu perhatian lebih lanjut.")
-else:
-    st.success("🟢 **Prediksi: Tidak Dropout**")
-    st.markdown("✅ Mahasiswa ini diprediksi akan **bertahan** dalam studinya.")
-
-# Visualisasi probabilitas
-st.subheader("📈 Probabilitas Dropout")
-st.progress(int(prob * 100))
-
-# Tambahkan label persentase
-if prob >= 0.75:
-    risk_level = "⚠️ Sangat Tinggi"
-elif prob >= 0.5:
-    risk_level = "🟠 Tinggi"
-elif prob >= 0.25:
-    risk_level = "🟡 Sedang"
-else:
-    risk_level = "🟢 Rendah"
-
-st.markdown(f"**Probabilitas:** `{prob:.2%}` ({risk_level})")
+        if pred == 1:
+            st.error("🔴 **Prediksi: Berisiko Dropout**")
+            st.markdown("🚨 Mahasiswa ini memiliki kemungkinan **tinggi** untuk mengalami *dropout*. Perlu perhatian lebih lanjut.")
+        else:
+            st.success("🟢 **Prediksi: Tidak Dropout**")
+            st.markdown("✅ Mahasiswa ini diprediksi akan **bertahan** dalam studinya.")
+        
+        # Visualisasi probabilitas
+        st.subheader("📈 Probabilitas Dropout")
+        st.progress(int(prob * 100))
+        
+        # Tambahkan label persentase
+        if prob >= 0.75:
+            risk_level = "⚠️ Sangat Tinggi"
+        elif prob >= 0.5:
+            risk_level = "🟠 Tinggi"
+        elif prob >= 0.25:
+            risk_level = "🟡 Sedang"
+        else:
+            risk_level = "🟢 Rendah"
+        
+        st.markdown(f"**Probabilitas:** `{prob:.2%}` ({risk_level})")
 
