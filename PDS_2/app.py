@@ -3,7 +3,7 @@ import pandas as pd
 import pickle
 
 # Load model dan scaler
-with open('best_model_randomforest.pkl', 'rb') as f_model:
+with open('best_model_RandomForest.pkl', 'rb') as f_model:
     model = pickle.load(f_model)
 
 with open('scaler.pkl', 'rb') as f_scaler:
