@@ -2,15 +2,16 @@ import streamlit as st
 import pandas as pd
 import pickle
 
-# Load model dan scaler
-with open('best_model_RandomForest.pkl', 'rb') as f_model:
+# Load model and scaler from subfolder "models"
+with open('model/best_model_RandomForest.pkl', 'rb') as f_model:
     model = pickle.load(f_model)
 
-with open('scaler.pkl', 'rb') as f_scaler:
+with open('model/scaler.pkl', 'rb') as f_scaler:
     scaler = pickle.load(f_scaler)
 
-with open('feature_columns.pkl', 'rb') as f_cols:
+with open('model/feature_columns.pkl', 'rb') as f_cols:
     feature_columns = pickle.load(f_cols)
+
     
 
 st.set_page_config(page_title="Dropout Prediction", layout="centered")
