@@ -24,17 +24,6 @@ with open(cols_path, 'rb') as f_cols:
     feature_columns = pickle.load(f_cols)
 
 
-with open('best_model', 'rb') as f_model:
-    model = pickle.load(f_model)
-
-with open('scaler_model', 'rb') as f_scaler:
-    scaler = pickle.load(f_scaler)
-
-with open('feature_model', 'rb') as f_cols:
-    feature_columns = pickle.load(f_cols)
-
-    
-
 st.set_page_config(page_title="Dropout Prediction", layout="centered")
 st.title("🎓 Student Dropout Prediction")
 st.markdown("Isi data mahasiswa di bawah ini untuk memprediksi kemungkinan dropout.")
