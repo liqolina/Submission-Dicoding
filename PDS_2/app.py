@@ -25,8 +25,8 @@ with open(cols_path, 'rb') as f_cols:
 
 
 st.set_page_config(page_title="Dropout Prediction", layout="centered")
-st.title("🎓 Student Dropout Prediction")
-st.markdown("Isi data mahasiswa di bawah ini untuk memprediksi kemungkinan dropout.")
+st.title("📊 Student Dropout Risk Predictor")
+st.markdown("Aplikasi memprediksi mahasiswa dropout")
 
 # Form Input
 with st.form("dropout_form"):
