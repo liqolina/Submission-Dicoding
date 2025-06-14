@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import pickle
 import os
+import sklearn
 
 # Ambil direktori saat ini (yaitu tempat app.py berada)
 current_dir = os.path.dirname(__file__)
