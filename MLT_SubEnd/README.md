@@ -332,12 +332,17 @@ Untuk mengevaluasi seberapa baik sistem rekomendasi, khususnya sistem rekomendas
 Berikut hasil dari evaluate_recommendation_system
 
 Evaluation for: 'Bleed'
+
 Top-10 Recommendations: ['DIVE!!', 'Digging to Death', 'Girl, Chill', 'Twinsanity', 'Cave Club', 'Chicago Massacre: Richard Speck', 'Seven Alone', 'Hellblock 13', 'Devil in the Flesh', 'Erik Terrell: Live at the Helium Comedy Club']
+
 Ground Truth: ['Putham Pudhu Kaalai ', 'Digging to Death', 'All Through the House', 'Sita Ramam']
 
 Precision@10: 0.1
+
 Recall@10:    0.25
+
 F1-Score@10:  0.1429
+
 {'precision': 0.1, 'recall': 0.25, 'f1_score': 0.1429}
 
 Bedasarkan hasil evaluasi ini sistem rekomendasi masih perlu ditingkatkan, terutama dalam memahami konteks film yang relevan secara semantik.
