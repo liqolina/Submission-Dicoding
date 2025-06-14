@@ -4,4 +4,4 @@ pandas
 seaborn
 streamlit
 pipreqs
-sklearn
+scikit-learn
