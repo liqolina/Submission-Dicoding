@@ -30,7 +30,7 @@ st.markdown("Aplikasi memprediksi mahasiswa dropout")
 
 # Form Input
 with st.form("dropout_form"):
-    st.header("📋 Formulir Data Mahasiswa")
+    st.header("Data Mahasiswa")
 
     col1, col2, col3 = st.columns(3)
 
