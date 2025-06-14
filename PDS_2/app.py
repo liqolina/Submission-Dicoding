@@ -165,3 +165,10 @@ with st.form("dropout_form"):
         
         st.markdown(f"**Probabilitas:** `{prob:.2%}` ({risk_level})")
 
+        if prob > 0.6:
+            st.warning("📌 **Saran:** Konseling akademik dan dukungan sosial disarankan.")
+        elif prob > 0.3:
+            st.info("📌 **Saran:** Pantau perkembangan akademik mahasiswa ini secara berkala.")
+        else:
+            st.success("📌 **Saran:** Tidak ada tindakan khusus diperlukan saat ini.")
+
