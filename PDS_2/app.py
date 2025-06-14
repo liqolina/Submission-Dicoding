@@ -49,13 +49,13 @@ with st.form("dropout_form"):
         marital_status = marital_status_map[marital_status_label]
         
         gender_map = {"Perempuan": 0, "Laki-laki": 1}
-        gender_label = st.selectbox("Jenis Kelamin", list(gender_map.keys()))
+        gender_label = st.selectbox("Jenis Kelamin", list(gender_map.keys()), index=1)
         gender = gender_map[gender_label]
 
         age = st.number_input("Usia Saat Mendaftar", 15, 100, 30, key="age")
         
         local_map = {"Bukan Lokal": 0, "Lokal": 1}
-        is_local_label = st.selectbox("Domisili Lokal?", list(local_map.keys()))
+        is_local_label = st.selectbox("Domisili Lokal?", list(local_map.keys()), index=1)
         is_local = local_map[is_local_label]
 
         int_map = {"Bukan Internasional": 0, "Internasional": 1}
@@ -71,7 +71,7 @@ with st.form("dropout_form"):
         special_needs = special_map[special_needs_label]
 
         parents_work_map = {"Tidak Keduanya": 0, "Keduanya Bekerja": 1}
-        parents_work_label = st.selectbox("Kedua Orang Tua Bekerja?", list(parents_work_map.keys()), index=2)
+        parents_work_label = st.selectbox("Kedua Orang Tua Bekerja?", list(parents_work_map.keys()), index=1)
         parents_work = parents_work_map[parents_work_label]
 
         st.subheader("🎓 Pendaftaran")
