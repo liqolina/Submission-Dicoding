@@ -14,7 +14,7 @@ Untuk mencapai tujuan tersebut, proyek ini akan mengimplementasikan dua pendekat
 
 Sistem rekomendasi telah terbukti menjadi elemen penting dalam menciptakan pengalaman pengguna yang lebih personal dan efisien, terutama di platform streaming seperti Amazon Prime Video. Dengan jumlah konten yang terus bertambah, sistem rekomendasi membantu pengguna menemukan film dan serial yang sesuai dengan preferensi mereka tanpa harus mencari secara manual. Amazon menggabungkan pendekatan content-based filtering dan collaborative filtering dalam sistem rekomendasinya, serta mengembangkan algoritma berbasis deep learning untuk meningkatkan relevansi hasil rekomendasi. Menurut laporan dari tim ilmuwan data Amazon, sistem ini telah memberikan kontribusi signifikan dalam meningkatkan engagement dan kepuasan pengguna terhadap platform.
 
-Referensi : [Smith, J., & Linden, G. (2017). The history of Amazon’s recommendation algorithm. Amazon Science.](https://www.amazon.science/the-history-of-amazons-recommendation-algorithm)
+Referensi Terkait : [Smith, J., & Linden, G. (2017). The history of Amazon’s recommendation algorithm. Amazon Science.](https://www.amazon.science/the-history-of-amazons-recommendation-algorithm)
 
 ## Business Understanding
 
@@ -337,34 +337,36 @@ B. Matriks Kemiripan Antar Judul
 
 Digunakan untuk melihat atau mengakses kemiripan antar film berdasarkan judul secara langsung.
 
-| **title**                               | **Open Graves** | **Digging to Death** | **The Grand Tour** | **Maze** | **Sita Ramam** |
-| --------------------------------------- | --------------- | -------------------- | ------------------ | -------- | -------------- |
-| **Open Graves**                         | 1.000000        | 0.005245             | 0.007073           | 0.007780 | 0.000000       |
-| **Digging to Death**                    | 0.005245        | 1.000000             | 0.018771           | 0.003384 | 0.006124       |
-| **The Grand Tour**                      | 0.007073        | 0.018771             | 1.000000           | 0.022093 | 0.000000       |
-| **Maze**                                | 0.007780        | 0.003384             | 0.022093           | 1.000000 | 0.000933       |
-| **Sita Ramam**                          | 0.000000        | 0.006124             | 0.000000           | 0.000933 | 1.000000       |
-| **All Through the House**               | 0.027390        | 0.022807             | 0.000000           | 0.000000 | 0.000000       |
-| **Avenge the Crows**                    | 0.001659        | 0.002299             | 0.000000           | 0.008271 | 0.003750       |
-| **Befikre**                             | 0.000000        | 0.010009             | 0.003108           | 0.001402 | 0.011051       |
-| **The Adventures of Ozzie and Harriet** | 0.000000        | 0.011166             | 0.002183           | 0.000985 | 0.000477       |
-| **Putham Pudhu Kaalai**                 | 0.000000        | 0.000000             | 0.000000           | 0.000970 | 0.061185       |
+| Title                            | Open Graves | Digging to Death | The Grand Tour | Maze     | Sita Ramam |
+|----------------------------------|-------------|------------------|----------------|----------|------------|
+| Open Graves                      | 1.000000    | 0.005245         | 0.007073       | 0.007780 | 0.000000   |
+| Digging to Death                 | 0.005245    | 1.000000         | 0.018771       | 0.003384 | 0.006124   |
+| The Grand Tour                   | 0.007073    | 0.018771         | 1.000000       | 0.022093 | 0.000000   |
+| Maze                             | 0.007780    | 0.003384         | 0.022093       | 1.000000 | 0.000933   |
+| Sita Ramam                       | 0.000000    | 0.006124         | 0.000000       | 0.000933 | 1.000000   |
+| All Through the House            | 0.027390    | 0.022807         | 0.000000       | 0.000000 | 0.000000   |
+| Avenge the Crows                 | 0.001659    | 0.002299         | 0.000000       | 0.008271 | 0.003750   |
+| Befikre                          | 0.000000    | 0.010009         | 0.003108       | 0.001402 | 0.011051   |
+| The Adventures of Ozzie and Harriet | 0.000000 | 0.011166         | 0.002183       | 0.000985 | 0.000477   |
+| Putham Pudhu Kaalai              | 0.000000    | 0.000000         | 0.000000       | 0.000970 | 0.061185   |
+
 
 #### Sistem Rekomendasi
-Membuat sistem rekomendasi berbasis konten (Content-Based Filtering), yang merekomendasikan film atau acara TV yang mirip dengan sebuah judul tertentu, berdasarkan kemiripan teks (misalnya sinopsis) yang dihitung dengan cosine similarity.
+Membuat sistem rekomendasi berbasis konten (Content-Based Filtering), yang merekomendasikan film atau acara TV yang mirip dengan sebuah judul tertentu, berdasarkan kemiripan teks (misalnya sinopsis) yang dihitung dengan cosine similarity. Rekomendasi film dengan judul "Digging to Death" adalah
 
-| **No** | **Title**             | **Type** | **Genres**                      | **Description**                                            | **Similarity Score** |
-| -----: | --------------------- | -------- | ------------------------------- | ---------------------------------------------------------- | -------------------: |
-|      1 | Bullitt County        | MOVIE    | action, drama, thriller         | An action/thriller set in 1977 about four friends...       |             0.115214 |
-|      2 | At Granny's House     | MOVIE    | thriller                        | A typical Midwest house. A sweet little old lady...        |             0.112151 |
-|      3 | Bleed                 | MOVIE    | horror, thriller                | A naïve young girl desperate to fit in with her...         |             0.108470 |
-|      4 | Karma                 | MOVIE    | drama, thriller, comedy, action | When senior police inspector Vishwa Pratap Singh...        |             0.098885 |
-|      5 | The Handler           | MOVIE    | action, drama, thriller, crime  | After throwing a job, an ex-Marine seeks refuge...         |             0.097815 |
-|      6 | Sniper Corpse         | MOVIE    | horror                          | The undead are former militia soldiers that are...         |             0.095206 |
-|      7 | The Bat               | MOVIE    | horror, thriller                | Mystery writer Cornelia Van Gorder has rented...           |             0.094364 |
-|      8 | House on Haunted Hill | MOVIE    | horror, crime                   | Frederick Loren has invited five strangers to...           |             0.089328 |
-|      9 | Devil in the Flesh    | MOVIE    | horror, thriller                | When her mother is killed in a mysterious house...         |             0.084746 |
-|     10 | Three Pines           | SHOW     | crime, drama                    | Chief Inspector Armand Gamache and his team investigate... |             0.084620 |
+| No. | Title                | Type  | Genres                             | Description                                                                                           | Similarity Score |
+|-----|----------------------|-------|-------------------------------------|-------------------------------------------------------------------------------------------------------|------------------|
+| 1   | Bullitt County       | MOVIE | action, drama, thriller            | An action/thriller set in 1977 about four friends...                                                 | 0.115214         |
+| 2   | At Granny's House    | MOVIE | thriller                           | A typical Midwest house. A sweet little old lady...                                                   | 0.112151         |
+| 3   | Bleed                | MOVIE | horror, thriller                   | A naïve young girl desperate to fit in with her...                                                    | 0.108470         |
+| 4   | Karma                | MOVIE | drama, thriller, comedy, action    | When senior police inspector Vishwa Pratap Singh...                                                  | 0.098885         |
+| 5   | The Handler          | MOVIE | action, drama, thriller, crime     | After throwing a job, an ex-Marine seeks refuge...                                                   | 0.097815         |
+| 6   | Sniper Corpse        | MOVIE | horror                             | The undead are former militia soldiers that are...                                                   | 0.095206         |
+| 7   | The Bat              | MOVIE | horror, thriller                   | Mystery writer Cornelia Van Gorder has rented...                                                     | 0.094364         |
+| 8   | House on Haunted Hill| MOVIE | horror, crime                      | Frederick Loren has invited five strangers to...                                                     | 0.089328         |
+| 9   | Devil in the Flesh   | MOVIE | horror, thriller                   | When her mother is killed in a mysterious house...                                                   | 0.084746         |
+| 10  | Three Pines          | SHOW  | crime, drama                       | Chief Inspector Armand Gamache and his team investigate...                                           | 0.084620         |
+
 
 #### Evaluasi Model Development Content Based Filtering
 Untuk mengevaluasi seberapa baik sistem rekomendasi, khususnya sistem rekomendasi berbasis konten (Content-Based Filtering / CBF) menggunakan metrik informasi retrieval:
@@ -457,18 +459,19 @@ Dari hasil yang didapatkan bahwa model telah berhasil dilatih secara stabil, dan
 Bertujuan untuk menghasilkan rekomendasi film untuk pengguna tertentu berdasarkan prediksi rating dari model Neural Collaborative Filtering (NCF) yang telah dilatih sebelumnya.
 
 Top 10 rekomendasi film untuk user 445:
-| **No.** | **Title**                   | **Genres**                                    | **Type** | **IMDb Score** | **TMDb Score** |
-| ------: | --------------------------- | --------------------------------------------- | -------- | -------------- | -------------- |
-|       1 | It's a Wonderful Life       | drama, family, fantasy, romance, comedy       | MOVIE    | 8.6            | 8.261          |
-|       2 | The Three Stooges           | comedy, family                                | SHOW     | 8.5            | 7.6            |
-|       3 | The Jack Benny Program      | comedy                                        | SHOW     | 8.6            | 7.5            |
-|       4 | The Best Years of Our Lives | drama, romance, war                           | MOVIE    | 8.1            | 7.838          |
-|       5 | The Little Foxes            | drama, romance                                | MOVIE    | 7.9            | 7.549          |
-|       6 | The Gold Rush               | drama, comedy, romance, western, family       | MOVIE    | 8.1            | 8.03           |
-|       7 | The General                 | comedy, drama, action, war, western, european | MOVIE    | 8.1            | 8.009          |
-|       8 | My Man Godfrey              | comedy, drama, romance                        | MOVIE    | 8.0            | 7.56           |
-|       9 | Scarlet Street              | drama, thriller, crime                        | MOVIE    | 7.8            | 7.6            |
-|      10 | What's My Line?             | reality, family                               | SHOW     | 8.5            | 7.2            |
+| No. | Title                        | Genres                                         | Type  | IMDb Score | TMDb Score |
+|-----|-----------------------------|-----------------------------------------------|-------|-------------|-------------|
+| 1   | It's a Wonderful Life       | drama, family, fantasy, romance, comedy       | MOVIE | 8.6         | 8.261       |
+| 2   | The Three Stooges           | comedy, family                                | SHOW  | 8.5         | 7.6         |
+| 3   | Red River                   | western, drama, romance, action               | MOVIE | 7.8         | 7.4         |
+| 4   | The Jack Benny Program      | comedy                                        | SHOW  | 8.6         | 7.5         |
+| 5   | The Best Years of Our Lives | drama, romance, war                           | MOVIE | 8.1         | 7.838       |
+| 6   | The Little Foxes            | drama, romance                                | MOVIE | 7.9         | 7.549       |
+| 7   | The Gold Rush               | drama, comedy, romance, western, family       | MOVIE | 8.1         | 8.03        |
+| 8   | The General                 | comedy, drama, action, war, western, european | MOVIE | 8.1         | 8.009       |
+| 9   | My Man Godfrey              | comedy, drama, romance                        | MOVIE | 8.0         | 7.56        |
+| 10  | What's My Line?             | reality, family                               | SHOW  | 8.5         | 7.2         |
+
 
 
 #### Evaluasi Collaborative Filtering
@@ -588,18 +591,19 @@ Metrik yang digunakan dalam projek ini adalah Mean Squared Error (MSE) dan Root 
 #### Hasil Metrik Model Collaborative Filtering
 
 Top 10 rekomendasi film untuk user 445:
-| **No.** | **Title**                   | **Genres**                                    | **Type** | **IMDb Score** | **TMDb Score** |
-| ------: | --------------------------- | --------------------------------------------- | -------- | -------------- | -------------- |
-|       1 | It's a Wonderful Life       | drama, family, fantasy, romance, comedy       | MOVIE    | 8.6            | 8.261          |
-|       2 | The Three Stooges           | comedy, family                                | SHOW     | 8.5            | 7.6            |
-|       3 | The Jack Benny Program      | comedy                                        | SHOW     | 8.6            | 7.5            |
-|       4 | The Best Years of Our Lives | drama, romance, war                           | MOVIE    | 8.1            | 7.838          |
-|       5 | The Little Foxes            | drama, romance                                | MOVIE    | 7.9            | 7.549          |
-|       6 | The Gold Rush               | drama, comedy, romance, western, family       | MOVIE    | 8.1            | 8.03           |
-|       7 | The General                 | comedy, drama, action, war, western, european | MOVIE    | 8.1            | 8.009          |
-|       8 | My Man Godfrey              | comedy, drama, romance                        | MOVIE    | 8.0            | 7.56           |
-|       9 | Scarlet Street              | drama, thriller, crime                        | MOVIE    | 7.8            | 7.6            |
-|      10 | What's My Line?             | reality, family                               | SHOW     | 8.5            | 7.2            |
+
+| No. | Title                        | Genres                                         | Type  | IMDb Score | TMDb Score |
+|-----|-----------------------------|-----------------------------------------------|-------|-------------|-------------|
+| 1   | It's a Wonderful Life       | drama, family, fantasy, romance, comedy       | MOVIE | 8.6         | 8.261       |
+| 2   | The Three Stooges           | comedy, family                                | SHOW  | 8.5         | 7.6         |
+| 3   | Red River                   | western, drama, romance, action               | MOVIE | 7.8         | 7.4         |
+| 4   | The Jack Benny Program      | comedy                                        | SHOW  | 8.6         | 7.5         |
+| 5   | The Best Years of Our Lives | drama, romance, war                           | MOVIE | 8.1         | 7.838       |
+| 6   | The Little Foxes            | drama, romance                                | MOVIE | 7.9         | 7.549       |
+| 7   | The Gold Rush               | drama, comedy, romance, western, family       | MOVIE | 8.1         | 8.03        |
+| 8   | The General                 | comedy, drama, action, war, western, european | MOVIE | 8.1         | 8.009       |
+| 9   | My Man Godfrey              | comedy, drama, romance                        | MOVIE | 8.0         | 7.56        |
+| 10  | What's My Line?             | reality, family                               | SHOW  | 8.5         | 7.2         |
 
 
 
