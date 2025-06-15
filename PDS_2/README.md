@@ -71,17 +71,15 @@ Untuk menjalankan aplikasi dan model prediksi risiko dropout secara optimal, dip
 
    Langkah pertama adalah membuat lingkungan baru bernama dropout-prediction menggunakan Python versi 3.9.15. Jalankan perintah berikut melalui terminal atau command prompt:
 
-  ```
-  conda create -n dropout-prediction python=3.11
-
-  ```
+   ```
+   conda create -n dropout-prediction python=3.11
+   ```
 
 2. Mengaktifkan Environment
 
    Setelah environment berhasil dibuat, aktifkan dengan perintah berikut:
    ```
    conda activate dropout-prediction
-
    ```
    
 3. Menginstal Dependensi
@@ -90,7 +88,7 @@ Untuk menjalankan aplikasi dan model prediksi risiko dropout secara optimal, dip
    
    ```
    pip install -r requirements.txt
-  ```
+   ```
 
 ## Business Dashboard
 
