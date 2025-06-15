@@ -60,7 +60,7 @@ Dataset yang digunakan dalam proyek ini berasal dari data internal mahasiswa Jay
 
 Dataset dapat diakses melalui tautan berikut:
 
-[Link Github][https://github.com/dicodingacademy/dicoding_dataset/blob/main/students_performance/data.csv]
+[Link Github](https://github.com/dicodingacademy/dicoding_dataset/blob/main/students_performance/data.csv)
 
 
 **Setup environment**:  
