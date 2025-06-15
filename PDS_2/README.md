@@ -59,7 +59,7 @@ Berdasarkan hasil analisis dan pemodelan, dirumuskan rekomendasi kebijakan berba
 Dataset yang digunakan dalam proyek ini berasal dari data internal mahasiswa Jaya Jaya Institut, yang mencakup informasi demografis, rekam jejak akademik, serta kondisi sosial dan ekonomi masing-masing mahasiswa.
 
 Dashboard dapat diakses melalui tautan berikut:
-[Link Github]([masukkan link di sini](https://github.com/dicodingacademy/dicoding_dataset/blob/main/students_performance/data.csv)
+[Link Github]([https://github.com/dicodingacademy/dicoding_dataset/blob/main/students_performance/data.csv]
 
 Dashboard-1
 ![lutfi_hermawan-dashboard-1](https://github.com/user-attachments/assets/a42e02f7-faed-4326-a7d3-e49b064a4327)
