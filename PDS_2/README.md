@@ -21,27 +21,35 @@ Beberapa faktor yang menjadi akar permasalahan antara lain:
 Pada proyek ini, dilakukan beberapa tahap utama untuk menyelesaikan permasalahan dropout mahasiswa di Jaya Jaya Institut, yaitu:
 
 1. Business Understanding
+
 Pada tahap ini dilakukan identifikasi menyeluruh terhadap konteks permasalahan dropout yang berdampak pada mutu pendidikan, reputasi institusi, dan efisiensi operasional. Pengembangan sistem prediktif yang dapat mendukung pelaksanaan intervensi secara dini dan tepat sasaran oleh pihak manajemen.
 
 2. Data Understanding dan Preparation
+
 Dilakukan eksplorasi terhadap data historis mahasiswa untuk memperoleh pemahaman awal mengenai struktur dan karakteristik data. Proses ini mencakup identifikasi dan penanganan nilai hilang (missing values), pencilan (outliers), serta penerapan teknik transformasi fitur seperti encoding dan feature engineering, guna memastikan data dalam kondisi layak untuk digunakan dalam tahap pemodelan.
 
 3. Exploratory Data Analysis (EDA)
+
 Tahap ini bertujuan untuk menggali pola dan tren dropout mahasiswa berdasarkan variabel-variabel utama seperti tingkat pendidikan orang tua, status beasiswa, jenis kelamin, capaian akademik, serta latar belakang sosial ekonomi. Hasil analisis ini digunakan untuk menghasilkan wawasan awal yang relevan dan mendukung proses pemodelan prediktif.
 
 4. Modeling
+
 Pengembangan model prediktif dilakukan dengan membandingkan beberapa algoritma machine learning, antara lain Logistic Regression, Random Forest, Gradient Boosting, dan SVM. Kinerja masing-masing model dievaluasi menggunakan metrik kuantitatif seperti akurasi, F1-score, precision, dan recall guna menentukan model yang paling optimal.
 
 5. Evaluation
+
 Model dengan performa terbaik dipilih berdasarkan hasil evaluasi yang objektif. Selanjutnya dilakukan interpretasi terhadap variabel-variabel yang paling berpengaruh terhadap probabilitas mahasiswa mengalami dropout, sebagai dasar bagi perumusan strategi intervensi.
 
 6. Script Prediction & Deployment Preparation
+
 Disusun skrip inferensi berbasis Python yang mengintegrasikan model terpilih dalam format .pkl, serta proses preprocessing yang konsisten dengan menggunakan scaler.pkl dan feature_columns.pkl. Model ini kemudian diintegrasikan ke dalam sebuah aplikasi web berbasis Streamlit yang memungkinkan pengguna memasukkan data mahasiswa secara manual untuk memperoleh hasil prediksi. Aplikasi telah berhasil di-deploy melalui Streamlit Community Cloud dan dapat diakses secara daring oleh pihak pemangku kepentingan.
 
 7. Dashboard Development
+
 Dibuat dashboard interaktif menggunakan platform Looker Studio yang terhubung dengan basis data Supabase. Dashboard ini menyajikan visualisasi statistik dan tren dropout mahasiswa secara real-time berdasarkan dimensi seperti jenis kelamin, status beasiswa, nilai akademik, dan parameter relevan lainnya, guna mendukung proses monitoring dan pengambilan keputusan.
 
 8. Recommendation
+
 Berdasarkan hasil analisis dan pemodelan, dirumuskan rekomendasi kebijakan berbasis data kepada pihak institusi, di antaranya: penguatan program beasiswa bagi kelompok rentan, optimalisasi sistem pemantauan akademik, serta penyediaan intervensi sosial dan dukungan psikologis bagi mahasiswa dengan tingkat risiko tinggi.
 
 ## Persiapan  
