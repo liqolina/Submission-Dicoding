@@ -88,6 +88,29 @@ Variabel-variabel pada Amazon Prime Movies and TV Shows dataset beserta Feature 
 | 3 | character  | 122705 non-null | object | The character name.           |
 | 4 | role       | 140553 non-null | object | ACTOR or DIRECTOR.            |
   
+### Mengecek data pada kolom yang memiliki nilai hilang (Missing Values)
+   
+| **Kolom**             | **Missing Values (Total)** | **Missing Values (%)** |
+| --------------------- | -------------------------- | ---------------------- |
+| seasons               | 9.322                      | 85,74%                 |
+| age\_certification    | 7.185                      | 66,08%                 |
+| tmdb\_score           | 2.126                      | 19,55%                 |
+| imdb\_votes           | 1.120                      | 10,30%                 |
+| imdb\_score           | 1.108                      | 10,19%                 |
+| imdb\_id              | 701                        | 6,45%                  |
+| tmdb\_popularity      | 571                        | 5,25%                  |
+| description           | 144                        | 1,32%                  |
+| id                    | 0                          | 0%                     |
+| title                 | 0                          | 0%                     |
+| type                  | 0                          | 0%                     |
+| release\_year         | 0                          | 0%                     |
+| runtime               | 0                          | 0%                     |
+| genres                | 0                          | 0%                     |
+| production\_countries | 0                          | 0%                     |
+
+
+Berdasarkan data pada dataset, terdapat nilai hilang (missing value) yang cukup tinggi pada kolom seasons dan age_certification, yaitu dengan persentase di atas 60%. Namun untuk "seasons" tidak perlu didrop dikarenakan pada "typre : Movie" tidak ada season dan hanya perlu diisi nilai 0. Sedangkan "age_certification" untuk nilai kosong diisi "UnRated"
+
 
 ## Exploratory Data Analysis (EDA):
 ### Tahun Rilis Terbanyak
@@ -119,30 +142,8 @@ Visualisasi menunjukkan distribusi jumlah season pada TV Show di Amazon Prime. M
 ## Data Preparation
 ### Model Development Content Based Filtering
 #### Missing Values pada Dataset Titles :
-1. Mengecek data pada kolom yang memiliki nilai hilang (Missing Values)
-   
-| **Kolom**             | **Missing Values (Total)** | **Missing Values (%)** |
-| --------------------- | -------------------------- | ---------------------- |
-| seasons               | 9.322                      | 85,74%                 |
-| age\_certification    | 7.185                      | 66,08%                 |
-| tmdb\_score           | 2.126                      | 19,55%                 |
-| imdb\_votes           | 1.120                      | 10,30%                 |
-| imdb\_score           | 1.108                      | 10,19%                 |
-| imdb\_id              | 701                        | 6,45%                  |
-| tmdb\_popularity      | 571                        | 5,25%                  |
-| description           | 144                        | 1,32%                  |
-| id                    | 0                          | 0%                     |
-| title                 | 0                          | 0%                     |
-| type                  | 0                          | 0%                     |
-| release\_year         | 0                          | 0%                     |
-| runtime               | 0                          | 0%                     |
-| genres                | 0                          | 0%                     |
-| production\_countries | 0                          | 0%                     |
 
-
-Berdasarkan data pada dataset, terdapat nilai hilang (missing value) yang cukup tinggi pada kolom seasons dan age_certification, yaitu dengan persentase di atas 60%. Namun untuk "seasons" tidak perlu didrop dikarenakan pada "typre : Movie" tidak ada season dan hanya perlu diisi nilai 0. Sedangkan "age_certification" untuk nilai kosong diisi "UnRated"
-
-2. Handling Missing Values
+1. Handling Missing Values
 Penanganan nilai hilang dilakukan untuk menjaga kualitas data dan menghindari bias pada model. Berikut pendekatan yang digunakan:
 
 - Kolom Age Certification akan diisi dengan data "Unrated".
@@ -153,7 +154,7 @@ Penanganan nilai hilang dilakukan untuk menjaga kualitas data dan menghindari bi
 
 Dengan penanganan missing values dapat memberikan peningkatan terhadap kinerja model dan data tidak menjadi bias.
 
-3. Mengecek kembali data setelah di perbaiki
+2. Mengecek kembali data setelah di perbaiki
 
 |Missing values dalam dataset:| Value |
 |-------------------|-----| 
