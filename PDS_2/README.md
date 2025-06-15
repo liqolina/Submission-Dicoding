@@ -58,14 +58,10 @@ Berdasarkan hasil analisis dan pemodelan, dirumuskan rekomendasi kebijakan berba
 **Sumber data**:  
 Dataset yang digunakan dalam proyek ini berasal dari data internal mahasiswa Jaya Jaya Institut, yang mencakup informasi demografis, rekam jejak akademik, serta kondisi sosial dan ekonomi masing-masing mahasiswa.
 
-Dashboard dapat diakses melalui tautan berikut:
+Dataset dapat diakses melalui tautan berikut:
+
 [Link Github]([https://github.com/dicodingacademy/dicoding_dataset/blob/main/students_performance/data.csv]
 
-Dashboard-1
-![lutfi_hermawan-dashboard-1](https://github.com/user-attachments/assets/a42e02f7-faed-4326-a7d3-e49b064a4327)
-
-Dashboard-2 
-![lutfi_hermawan-dashboard-2](https://github.com/user-attachments/assets/cb78c835-8dec-449b-a787-d215ecf82de3)
 
 **Setup environment**:  
 
@@ -104,6 +100,12 @@ Melalui dashboard ini, manajemen dapat memperoleh insight yang lebih komprehensi
 
 Dashboard dapat diakses melalui tautan berikut:
 [Link Dashboard Looker Studio](https://lookerstudio.google.com/reporting/a31a819a-8291-4f65-ae42-4655f3b2ff76)
+
+Dashboard-1
+![lutfi_hermawan-dashboard-1](https://github.com/user-attachments/assets/a42e02f7-faed-4326-a7d3-e49b064a4327)
+
+Dashboard-2 
+![lutfi_hermawan-dashboard-2](https://github.com/user-attachments/assets/cb78c835-8dec-449b-a787-d215ecf82de3)
 
 
 ## Menjalankan Sistem Machine Learning
