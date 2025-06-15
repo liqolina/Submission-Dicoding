@@ -109,15 +109,19 @@ Dashboard-2
 
 
 ## Menjalankan Sistem Machine Learning
+
 ### Prototipe Sistem Prediksi Dropout
+
 Prototipe sistem prediksi dropout dikembangkan menggunakan platform Streamlit, yang memungkinkan pengguna untuk memasukkan data mahasiswa secara langsung dan memperoleh prediksi risiko dropout secara real-time melalui antarmuka web yang interaktif.
 
 ### Akses Prototipe
+
 Pengguna dapat mencoba prototipe ini secara daring melalui tautan berikut:
 
 [Link Dashboard Streamlit](https://submission-dicoding-vx8dvmycvtnq3zstrhpisz.streamlit.app/)
 
 ### Instruksi Menjalankan Prototipe Secara Lokal
+
 Untuk menjalankan aplikasi di lingkungan lokal, jalankan perintah berikut pada terminal setelah mengatur lingkungan yang diperlukan:
 
 ```
@@ -125,9 +129,11 @@ streamlit run app.py
 ```
 
 ## Conclusion
+
 Model Random Forest menunjukkan performa terbaik dengan akurasi sekitar 78% serta recall tertinggi dalam mendeteksi mahasiswa yang berisiko dropout. Model ini secara konsisten unggul dalam mengidentifikasi kelas dropout dibandingkan dengan model lain yang diuji. Selain itu, dashboard yang dibuat juga sangat membantu dalam memberikan informasi terkini terkait status mahasiswa, sehingga memudahkan pengambilan keputusan yang tepat dan cepat untuk mengatasi potensi dropout. Dengan demikian, kombinasi model Random Forest dan dashboard interaktif dapat menjadi alat yang efektif dalam mendukung upaya peningkatan retensi mahasiswa.
 
 ## Rekomendasi Action Items
+
 Berdasarkan hasil analisis dan insight yang diperoleh dari dashboard Student Dropout Monitoring di Jaya Jaya Institut, berikut beberapa strategi yang disarankan untuk mengurangi tingkat dropout dan meningkatkan tingkat kelulusan mahasiswa:
 
 1. Pemantauan Dini dan Intervensi Proaktif
