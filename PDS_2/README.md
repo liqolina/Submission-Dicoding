@@ -101,11 +101,13 @@ Dashboard dapat diakses melalui tautan berikut:
 
 Dashboard-1
 
-![lutfi_hermawan-dashboard-1](https://github.com/user-attachments/assets/a42e02f7-faed-4326-a7d3-e49b064a4327)
+![lutfi_hermawan-dashboard-1](https://github.com/user-attachments/assets/9094e584-4283-4121-b677-31a8c37584b7)
+
 
 Dashboard-2 
 
-![lutfi_hermawan-dashboard-2](https://github.com/user-attachments/assets/cb78c835-8dec-449b-a787-d215ecf82de3)
+![lutfi_hermawan-dashboard-2](https://github.com/user-attachments/assets/8f2731e6-e25a-4f1b-8733-9eace287daa1)
+
 
 
 ## Menjalankan Sistem Machine Learning
